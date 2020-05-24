@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="@Configuration* 表示一个配置文件（配置源） * 当配置类@Configuration之后，配置类内部方法之间发生依赖关系，能够保证单例，保证从容器中获取，原因是将该类转变成代理类去执行123456789101112@configurationpublic class AppConfig&amp;#123;	@Bean	public User user()&amp;#123;		return new">
+<meta name="keywords" content="技术总览">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring中常见注解">
+<meta property="og:url" content="http://yoursite.com/2020/02/16/技术总览/系统设计_常用框架/Spring中常见注解/index.html">
+<meta property="og:site_name" content="凡星一点">
+<meta property="og:description" content="@Configuration* 表示一个配置文件（配置源） * 当配置类@Configuration之后，配置类内部方法之间发生依赖关系，能够保证单例，保证从容器中获取，原因是将该类转变成代理类去执行123456789101112@configurationpublic class AppConfig&amp;#123;	@Bean	public User user()&amp;#123;		return new">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-16T04:29:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring中常见注解">
+<meta name="twitter:description" content="@Configuration* 表示一个配置文件（配置源） * 当配置类@Configuration之后，配置类内部方法之间发生依赖关系，能够保证单例，保证从容器中获取，原因是将该类转变成代理类去执行123456789101112@configurationpublic class AppConfig&amp;#123;	@Bean	public User user()&amp;#123;		return new">
+  <link rel="canonical" href="http://yoursite.com/2020/02/16/技术总览/系统设计_常用框架/Spring中常见注解/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Spring中常见注解 | 凡星一点</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凡星一点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-booklist">
+      
+    
+
+    <a href="/booklist/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>书单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/技术总览/系统设计_常用框架/Spring中常见注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Spring中常见注解
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-16 12:15:39 / 修改时间：12:29:20" itemprop="dateCreated datePublished" datetime="2020-02-16T12:15:39+08:00">2020-02-16</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/" itemprop="url" rel="index"><span itemprop="name">技术总览</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/常用框架/" itemprop="url" rel="index"><span itemprop="name">常用框架</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration"></a>@Configuration</h4><pre><code>* 表示一个配置文件（配置源）
+* 当配置类@Configuration之后，配置类内部方法之间发生依赖关系，能够保证单例，保证从容器中获取，原因是将该类转变成代理类去执行</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@configuration</span><br><span class="line">public class AppConfig&#123;</span><br><span class="line">	@Bean</span><br><span class="line">	public User user()&#123;</span><br><span class="line">		return new User()</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Bean</span><br><span class="line">	public UserService userService()&#123;</span><br><span class="line">		return new UserService(user())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+<h4 id="Contoller"><a href="#Contoller" class="headerlink" title="@Contoller"></a>@Contoller</h4><p>SpringMVC 中，控制器 Controller 负责处理 DispatcherServlet 分发的请求，它把用户请求的数据经过业务处理层处理之后封装成一个 Model，然后再把该 Model 返回给对应的 View 进行展示。</p>
+<p>SpringMVC 提供了一个非常简便的定义 Controller 的方法，你无需继承特定的类或者接口，只需使用 @Controller 标记一个类是 Contoller。</p>
+<h4 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h4><p>使用 @RequestMapping 来映射 URL 到控制器，或者到 Controller 控制器的处理方法上。method 的值一旦指定，则处理方法只对指定的 HTTP method 类型请求处理。</p>
+<p>可以为多个方法映射相同的 URI，不同的 HTTP method 类型，Spring MVC 根据请求的 method 类型是可以区分开这些方法的。</p>
+<h4 id="RequestParam-和-PathVariable"><a href="#RequestParam-和-PathVariable" class="headerlink" title="@RequestParam 和 @PathVariable"></a>@RequestParam 和 @PathVariable</h4><p>在 SpringMVC 中，两者的作用都是将 request 里的参数的值绑定到 Controller 里的方法参数中，区别在于 URL 的写法不同。</p>
+<pre><code>* 使用 @RequestParam 时，URL 是这样的：
+http://host:port/path?参数名=参数值
+
+* 使用 @PathVariable 时，URL 是这样的：
+http://host:port/path/参数值</code></pre><h4 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h4><p>@Autowired 可以对成员变量、成员方法和构造函数进行标注，来完成自动装配工作。</p>
+<h4 id="Service、-Contrller、-Repository-和-Component"><a href="#Service、-Contrller、-Repository-和-Component" class="headerlink" title="@Service、 @Contrller、 @Repository 和 @Component"></a>@Service、 @Contrller、 @Repository 和 @Component</h4><p>@Service、 @Contrller、 @Repository 其实这 3 个注解和 @Component 是等效的，用在实现类上：</p>
+<pre><code>* @Service 用于标注业务层组件
+* @Controller 用于标注控制层组件
+* @Repository 用于编著数据访问组件
+* @Component 泛指组件，当组件不好归类时，可以使用这个注解进行标注</code></pre><h4 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h4><p>在 Spring 3.0 中，可以通过使用 @Value，对一些如 xxx.properties 文件中的文件，进行键值对的注入。</p>
+<h4 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h4><p>该注解用于将 Controller 中方法返回的对象，通过适当的 HttpMessageConverter 转换为指定的格式后，写入到 Response 对象的 bodys 数据区。</p>
+<h4 id="Autowired-和-Resource-的区别"><a href="#Autowired-和-Resource-的区别" class="headerlink" title="@Autowired 和 @Resource 的区别"></a>@Autowired 和 @Resource 的区别</h4><p>@Autowired</p>
+<pre><code>* Spring 提供的注解
+* 采用的策略是按照类型注入的</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class UserService&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    userDao; //在 Spring 容器中找到类型为 userDao 的类，将其注入</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//存在问题：同一类型有多个 Bean，可以使用 @Qualifier 具体去装配哪个对象。</span><br><span class="line">public class UserService&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    @Qualifier(name=&quot;userDao&quot;)</span><br><span class="line">    userDao; //在 Spring 容器中找到类型为 userDao 的类，将其注入</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@Resource</p>
+<pre><code>* J2EE 提供的注解
+* 默认是按照名称注入的</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Service&#123;</span><br><span class="line">    @Resource</span><br><span class="line">    userDao; //自动按名称进行装配</span><br><span class="line"></span><br><span class="line">    @Resource(name=&quot;studentDao&quot;)</span><br><span class="line">    studentDao; //按名称进行装配，找不到会抛出异常</span><br><span class="line"></span><br><span class="line">    @Resource(type=&quot;TeacherDao&quot;)</span><br><span class="line">    teacherDao; //按类型进行装配，找不到或者找到多个都会抛出异常</span><br><span class="line"></span><br><span class="line">    @Resource(name=&quot;manDao&quot;,type=&quot;ManDao&quot;)</span><br><span class="line">    manDao;//找唯一匹配的 Bean 进行装配，如果找不到则会抛出异常</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/技术总览/" rel="tag"># 技术总览</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/02/15/技术总览/系统设计_常用框架/Spring中Bean的作用域与生命周期/" rel="next" title="Spring中Bean的作用域与生命周期">
+                  <i class="fa fa-chevron-left"></i> Spring中Bean的作用域与生命周期
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/02/16/技术总览/系统设计_常用框架/SpringMVC/" rel="prev" title="SpringMVC">
+                  SpringMVC <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ugia</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Configuration"><span class="nav-number">1.</span> <span class="nav-text">@Configuration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Contoller"><span class="nav-number">2.</span> <span class="nav-text">@Contoller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RequestMapping"><span class="nav-number">3.</span> <span class="nav-text">@RequestMapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RequestParam-和-PathVariable"><span class="nav-number">4.</span> <span class="nav-text">@RequestParam 和 @PathVariable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autowired"><span class="nav-number">5.</span> <span class="nav-text">@Autowired</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Service、-Contrller、-Repository-和-Component"><span class="nav-number">6.</span> <span class="nav-text">@Service、 @Contrller、 @Repository 和 @Component</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Value"><span class="nav-number">7.</span> <span class="nav-text">@Value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResponseBody"><span class="nav-number">8.</span> <span class="nav-text">@ResponseBody</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autowired-和-Resource-的区别"><span class="nav-number">9.</span> <span class="nav-text">@Autowired 和 @Resource 的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ugia</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

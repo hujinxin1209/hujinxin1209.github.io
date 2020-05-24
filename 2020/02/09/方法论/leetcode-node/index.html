@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="LeetcodeLeetCode的题大致分成两类： 基础算法的知识：递归（深度优先DFS，广度优先BFS) 、动态规划（Dynamic Programming）、拆半查找（Binary Search）、回溯（Back tracing）、分治法（Divide and Conquer）、大量的对树，数组、链表、字符串和hash表的操作  编程题。比如：atoi，strstr，add two num，括">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 Leetcode">
+<meta property="og:url" content="http://yoursite.com/2020/02/09/方法论/leetcode-node/index.html">
+<meta property="og:site_name" content="凡星一点">
+<meta property="og:description" content="LeetcodeLeetCode的题大致分成两类： 基础算法的知识：递归（深度优先DFS，广度优先BFS) 、动态规划（Dynamic Programming）、拆半查找（Binary Search）、回溯（Back tracing）、分治法（Divide and Conquer）、大量的对树，数组、链表、字符串和hash表的操作  编程题。比如：atoi，strstr，add two num，括">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-19T13:42:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于 Leetcode">
+<meta name="twitter:description" content="LeetcodeLeetCode的题大致分成两类： 基础算法的知识：递归（深度优先DFS，广度优先BFS) 、动态规划（Dynamic Programming）、拆半查找（Binary Search）、回溯（Back tracing）、分治法（Divide and Conquer）、大量的对树，数组、链表、字符串和hash表的操作  编程题。比如：atoi，strstr，add two num，括">
+  <link rel="canonical" href="http://yoursite.com/2020/02/09/方法论/leetcode-node/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>关于 Leetcode | 凡星一点</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凡星一点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-booklist">
+      
+    
+
+    <a href="/booklist/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>书单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/09/方法论/leetcode-node/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">关于 Leetcode
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-09 17:40:58" itemprop="dateCreated datePublished" datetime="2020-02-09T17:40:58+08:00">2020-02-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-19 21:42:43" itemprop="dateModified" datetime="2020-02-19T21:42:43+08:00">2020-02-19</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-node/" itemprop="url" rel="index"><span itemprop="name">leetcode-node</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h3><p>LeetCode的题大致分成两类：</p><ul>
+<li><p>基础算法的知识：递归（深度优先DFS，广度优先BFS) 、动态规划（Dynamic Programming）、拆半查找（Binary Search）、回溯（Back tracing）、分治法（Divide and Conquer）、大量的对树，数组、链表、字符串和hash表的操作</p>
+</li>
+<li><p>编程题。比如：atoi，strstr，add two num，括号匹配，字符串乘法，通配符匹配，文件路径简化，Text Justification，反转单词等等。通过做这些题，可以非常好的训练你对各种情况的考虑，以及你对程序代码组织的掌控（其实就是其中的状态变量）。</p>
+</li>
+</ul><a id="more"></a>
+
+<h3 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h3><ul>
+<li><p>将一个难以直接解决的大问题，分割成一些规模较小的相同问题，各个击破，分而治之</p>
+</li>
+<li><p>分治算法常用递归实现</p>
+<ul>
+<li>问题缩小的小规模可以很容易解决</li>
+<li>问题可以分解为规模较小相同问题</li>
+<li>子问题的解可以合并为该问题的解</li>
+<li>各个子问题相互独立，(如果这条不满足,转为动态规划求</li>
+</ul>
+</li>
+<li><p>分治法的步骤：</p>
+<ul>
+<li>分解</li>
+<li>解决</li>
+<li>合并</li>
+</ul>
+</li>
+<li><p>案例</p>
+<ul>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>最大子数组和</li>
+</ul>
+</li>
+</ul>
+<h3 id="动态规划-Dynamic-Pragram"><a href="#动态规划-Dynamic-Pragram" class="headerlink" title="动态规划 Dynamic Pragram"></a>动态规划 Dynamic Pragram</h3><ul>
+<li><p>复杂问题不能分解成几个子问题，而分解成一系列子问题</p>
+</li>
+<li><p>DP通常基于一个递推公式及一个(或多个)初始状态，当前子问题解由上一次子问题解推出</p>
+</li>
+<li><p>状态 状态转移方程 递推关系</p>
+</li>
+<li><p>动态规划算法的关键在于解决冗余，以空间换时间的技术，需要存储过程中的各种状态。可以看着是分治算法+解决冗余</p>
+</li>
+<li><p>使用动态规划算法的问题的特征是子问题的重叠性，否则动态规划算法不具备优势</p>
+</li>
+<li><p>步骤</p>
+<ul>
+<li>划分问题</li>
+<li>选择状态</li>
+<li>确定决策并写出状态转移方程</li>
+<li>写出规划方程</li>
+</ul>
+</li>
+</ul>
+<h3 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h3><p>也叫 试探法。 是一种选优搜索法，按照选优条件搜索，当搜索到某一步，发现原先选择并不优或达不到目标，就退回重新选择。回溯法求解问题时，一般是一边建树，一边遍历该树；且采用非递归方法。</p>
+<ul>
+<li><p>步骤</p>
+<ul>
+<li>针对问题，定义解空间（ 这时候解空间是一个集合，且包含我们要找的最优解）</li>
+<li>组织解空间，确定易于搜索的解空间结构，通常组织成树结构 或 图结构</li>
+<li>深度优先搜索解空间，搜索过程中用剪枝函数避免无效搜索</li>
+</ul>
+</li>
+<li><p>案例</p>
+<ul>
+<li>八皇后问题<br>  8x8的国际象棋棋盘上放置8个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。任意2个皇后都不能处于同一个 横线，纵线，斜线上。</li>
+</ul>
+</li>
+</ul>
+<h3 id="穷举搜索法"><a href="#穷举搜索法" class="headerlink" title="穷举搜索法"></a>穷举搜索法</h3><p>或者叫蛮力法。对可能的解的众多候选按照某种顺序逐一枚举和检验。典型的问题如选择排序和冒泡排序。</p>
+<ul>
+<li>案例<ul>
+<li>背包问题 给定n个重量为 w1,w2,…,wn,定价为 v1,v2,…,vn 的物品，和一个沉重为W的背包，求这些物品中一个最有价值的子集，且能装入包中。</li>
+<li>选择排序</li>
+<li>冒泡排序</li>
+</ul>
+</li>
+</ul>
+<h3 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h3><p>不追求最优解，只找到满意解。</p>
+<ul>
+<li>案例<ul>
+<li>找回零钱问题</li>
+<li>装箱问题</li>
+<li>赫夫曼编码</li>
+</ul>
+</li>
+</ul>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>是一种不断用旧值递推新值的过程，分精确迭代和近视迭代。是用来求方程和方程组近似根的方法。<br>迭代变量<br>迭代关系， 迭代关系选择不合理，会导致迭代失败<br>迭代过程控制，也就是迭代什么时候结束，不能无休止进行下去</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>递归是一种设计和描述算法的有力工具。 递归算法执行过程分 递推 和 回归 两个阶段<br>在 递推 阶段，将大的问题分解成小的问题 在 回归 阶段，获得最简单问题的解后，逐级返回，依次得到稍微复杂情况的解，知道获得最终的结果</p>
+<ul>
+<li><p>确定递归公式</p>
+</li>
+<li><p>确定边界条件</p>
+</li>
+<li><p>案例</p>
+<ul>
+<li>斐波那契数列</li>
+<li>快速排序</li>
+<li>递归运行效率较低，因为有函数调用的开销，递归多次也可能造成栈溢出。</li>
+<li>阶乘计算</li>
+</ul>
+</li>
+</ul>
+<p>参考 : <a href="https://coolshell.cn/articles/12052.html" target="_blank" rel="noopener">酷 壳 – CoolShell</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/01/16/Pascal-s-Triangle-118/" rel="next" title="Pascal's Triangle(118)">
+                  <i class="fa fa-chevron-left"></i> Pascal's Triangle(118)
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/02/10/方法论/技术/A_高效学习/" rel="prev" title="A_高效学习">
+                  A_高效学习 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ugia</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Leetcode"><span class="nav-number">1.</span> <span class="nav-text">Leetcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分治算法"><span class="nav-number">2.</span> <span class="nav-text">分治算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划-Dynamic-Pragram"><span class="nav-number">3.</span> <span class="nav-text">动态规划 Dynamic Pragram</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯法"><span class="nav-number">4.</span> <span class="nav-text">回溯法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#穷举搜索法"><span class="nav-number">5.</span> <span class="nav-text">穷举搜索法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心算法"><span class="nav-number">6.</span> <span class="nav-text">贪心算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代法"><span class="nav-number">7.</span> <span class="nav-text">迭代法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">8.</span> <span class="nav-text">递归</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ugia</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

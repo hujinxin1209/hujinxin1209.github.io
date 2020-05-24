@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="IOC 概念IOC，即控制反转（Iversion of Control）是一种设计思想* 控制：控制对象的创建及销毁(生命周期)。 * 反转：将对象的控制权交给 IoC 容器。使用 IOC 的好处：* 避免在各处使用 new 来创建类，并且可以统一维护 * 创建实例时，不需要了解其中的细节所有的类都会在Spring容器中注册，告诉Spring你是什么类，你需要什么类，然后Spring会在系统运行的">
+<meta name="keywords" content="技术总览">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring IOC">
+<meta property="og:url" content="http://yoursite.com/2020/02/11/技术总览/系统设计_常用框架/Spring-IOC/index.html">
+<meta property="og:site_name" content="凡星一点">
+<meta property="og:description" content="IOC 概念IOC，即控制反转（Iversion of Control）是一种设计思想* 控制：控制对象的创建及销毁(生命周期)。 * 反转：将对象的控制权交给 IoC 容器。使用 IOC 的好处：* 避免在各处使用 new 来创建类，并且可以统一维护 * 创建实例时，不需要了解其中的细节所有的类都会在Spring容器中注册，告诉Spring你是什么类，你需要什么类，然后Spring会在系统运行的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/IOC%E5%92%8CDI%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/IOC%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.png">
+<meta property="og:updated_time" content="2020-02-13T11:35:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring IOC">
+<meta name="twitter:description" content="IOC 概念IOC，即控制反转（Iversion of Control）是一种设计思想* 控制：控制对象的创建及销毁(生命周期)。 * 反转：将对象的控制权交给 IoC 容器。使用 IOC 的好处：* 避免在各处使用 new 来创建类，并且可以统一维护 * 创建实例时，不需要了解其中的细节所有的类都会在Spring容器中注册，告诉Spring你是什么类，你需要什么类，然后Spring会在系统运行的">
+<meta name="twitter:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/IOC%E5%92%8CDI%E5%85%B3%E7%B3%BB.png">
+  <link rel="canonical" href="http://yoursite.com/2020/02/11/技术总览/系统设计_常用框架/Spring-IOC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Spring IOC | 凡星一点</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凡星一点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-booklist">
+      
+    
+
+    <a href="/booklist/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>书单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/11/技术总览/系统设计_常用框架/Spring-IOC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Spring IOC
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-11 21:35:03" itemprop="dateCreated datePublished" datetime="2020-02-11T21:35:03+08:00">2020-02-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-13 19:35:47" itemprop="dateModified" datetime="2020-02-13T19:35:47+08:00">2020-02-13</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/" itemprop="url" rel="index"><span itemprop="name">技术总览</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/常用框架/" itemprop="url" rel="index"><span itemprop="name">常用框架</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="IOC-概念"><a href="#IOC-概念" class="headerlink" title="IOC 概念"></a>IOC 概念</h4><p>IOC，即控制反转（Iversion of Control）是一种设计思想</p><pre><code>* 控制：控制对象的创建及销毁(生命周期)。
+* 反转：将对象的控制权交给 IoC 容器。</code></pre><p>使用 IOC 的好处：</p><pre><code>* 避免在各处使用 new 来创建类，并且可以统一维护
+* 创建实例时，不需要了解其中的细节</code></pre><p>所有的类都会在Spring容器中注册，告诉Spring你是什么类，你需要什么类，然后Spring会在系统运行的时候把你需要的类信息主动给你。<br>所有类的创建、销毁都有Spring来控制，也就是说控制对象生命周期的不是引用它的对象，而是Spring。对某个具体对象而言，以前它是控制其他对象，现在所有对象都被Spring控制</p><a id="more"></a>
+
+
+<h4 id="依赖注入-Dependency-Injection-DI"><a href="#依赖注入-Dependency-Injection-DI" class="headerlink" title="依赖注入(Dependency Injection,DI)"></a>依赖注入(Dependency Injection,DI)</h4><p>所谓依赖注入就是底层类作为参数传递给上层类，实现上层对下层的控制，依赖注入实现控制反转<br>举例：汽车生产</p>
+<pre><code>* 传统方式： 生产 轮子 -&gt; 底盘 -&gt; 车外壳 -&gt; 汽车
+* Spring： 生产 汽车 -&gt; 车外壳 -&gt; 底盘 -&gt; 轮子</code></pre><h4 id="IOC-和-DI-的关系"><a href="#IOC-和-DI-的关系" class="headerlink" title="IOC 和 DI 的关系"></a>IOC 和 DI 的关系</h4><p>使用DI实现IOC DI的实现方式：</p>
+<pre><code>* setter注入
+* 构造器注入
+* 接口注入
+* 注解注入</code></pre><p>依赖倒置原则、IOC、DI、IOC容器的关系</p>
+<p><img src="/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/IOC%E5%92%8CDI%E5%85%B3%E7%B3%BB.png" alt="IOC和DI关系"></p>
+<h4 id="IOC-容器的初始化过程"><a href="#IOC-容器的初始化过程" class="headerlink" title="IOC 容器的初始化过程"></a>IOC 容器的初始化过程</h4><p>XML(读取) -&gt; Resource(解析) -&gt; BeanDefinition(注册) -&gt; BeanFactory</p>
+<pre><code>* Resource定位(即BeanDefinition的资源定位，Resource为各种形式的BeanDefinition的使用都提供了统一的接口)
+* BeanDefinition 的载入
+* 向 IOC 容器中注册BeanDefinition(实际上IOC容器内部维护一个HashMap，注册过程就是将BeanDefinition添加到HashMap中)</code></pre><h4 id="IOC-加载过程"><a href="#IOC-加载过程" class="headerlink" title="IOC 加载过程"></a>IOC 加载过程</h4><p>IOC 容器其实就是一个大工厂，它用来管理我们所有的对象以及依赖关系：</p>
+<pre><code>* 根据 Bean 配置信息在容器内部创建 Bean 定义注册表
+* 根据注册表加载，实例化 Bean，建立 Bean 与 Bean 之间的依赖关系
+* 将 Bean 实例放入 Spring IoC 容器中，等待应用程序调用</code></pre><p><img src="/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/IOC%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.png" alt="IOC加载过程"></p>
+<h4 id="BeanFactory-和-ApplicationContext"><a href="#BeanFactory-和-ApplicationContext" class="headerlink" title="BeanFactory 和 ApplicationContext"></a>BeanFactory 和 ApplicationContext</h4><p>BeanFactory</p>
+<pre><code>* IOC 容器要实现的最基础的接口
+* 采用延迟初始化策略(容器初始化完成后并不会创建 Bean 对象，只有当收到初始化请求时才进行初始化)
+* 由于是延迟初始化策略，因此启动速度较快，占用资源较少</code></pre><p>ApplicationConext</p>
+<pre><code>* 在 BeanFactory 基础上，增加了更为高级的特性：事件发布、国际化等。
+* 在容器启动时，完成所有 Bean 的创建
+* 启动时间较长，占用资源较多</code></pre><p>BeanFactory 和 FactoryBean 的区别</p>
+<pre><code>BeanFactory 是 IOC 最基本的容器，负责生产和管理 Bean，为其他具体的 IOC 容器提供了最基本的规范。
+FactoryBean 是一个 Bean，是一个接口，当 IOC 容器中的 Bean 实现了 FactoryBean 后，通过
+getBean(String beanName) 获取到的 Bean 对象并不是 FactoryBean 的实现类对象，而是这个
+实现类中的 getObject() 方法返回的对象。要想获取 FactoryBean 的实现类对象，就要在 beanName 前面加上 &quot;&amp;&quot;。</code></pre><p>BeanFactory 和 对象 的区别<br>    bean在Spring中有生命周期，创建和依赖关系交由Spring管理，对象随时都可以new出来的，由JVM管理</p>
+<h4 id="getBean-代码逻辑"><a href="#getBean-代码逻辑" class="headerlink" title="getBean 代码逻辑"></a>getBean 代码逻辑</h4><pre><code>* 获取参数 name 转化为 beanName
+* 从缓存中加载实例
+* 实例化 Bean
+* 检测 parentBeanFactory（若无缓存数据，直接到 parentBeanFactory 中去加载）
+* 初始化依赖的 Bean
+* 返回 Bean</code></pre><h4 id="Spring-循环依赖"><a href="#Spring-循环依赖" class="headerlink" title="Spring 循环依赖"></a>Spring 循环依赖</h4><p>类的实例化和类的初始化</p>
+<pre><code>* 类的实例化是指创建一个类的实例(对象)的过程
+* 类的初始化是指为类中各个类成员(被static修饰的成员变量)赋初始值的过程，是类生命周期中的一个阶段。</code></pre><p>在 Spring 容器中我们的类又是什么时候进行初始化和实例化的呢？</p>
+<pre><code>* Spring 中所有 Bean 默认都是单例模式，所以 Bean 的初始化和实例化都是在加载进入 Bean 容器时做的
+* 如果想使用时再初始化，那么可以把类定义为原型模式
+容器中默认单例bean则支持，prototype原型bean(每次请求时，创建新的bean)不支持</code></pre><p>解决循环依赖<br>只有单例对象才满足Spring解决循环依赖问题，在 Spring IoC 容器中，有且仅有一个对象，将对象放入缓存中。Spring 中使用“三级缓存”：</p>
+<pre><code>* SingletonObjects：单例对象的缓存（存储实例化完成的 Bean）
+* earlySingletonObjects：提前曝光的单例对象的缓存（存储正在实例化的 Bean）
+* SingletonFactories：单例对象工厂 ObjectFactory 的缓存</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/** Cache of singleton objects: bean name --&gt; bean instance */</span><br><span class="line">private final Map&lt;String, Object&gt; singletonObjects = new ConcurrentHashMap&lt;String, Object&gt;(256);</span><br><span class="line">/** Cache of singleton factories: bean name --&gt; ObjectFactory */</span><br><span class="line">private final Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = new HashMap&lt;String, ObjectFactory&lt;?&gt;&gt;(16);</span><br><span class="line">/** Cache of early singleton objects: bean name --&gt; bean instance */</span><br><span class="line">private final Map&lt;String, Object&gt; earlySingletonObjects = new HashMap&lt;String, Object&gt;(16);</span><br></pre></td></tr></table></figure>
+
+<p>Spring 中单例对象的初始化主要分为 3 步：</p>
+<pre><code>*第一步：createBeanInstance 实例化，实际上就是调用对应的构造方法构造对象，此时只是调用了构造方法，spring xml中指定的property并没有进行populate
+*第二步：populateBean 填充属性，这步对spring xml中指定的property进行populate
+*第三步：intializeBean 初始化 调用spring xml中指定的init方法，或者AfterPropertiesSet方法 会发生循环依赖的步骤集中在第一步和第二步。</code></pre><p>在进行 createBeanInstance 后，该单例对象此时已被创建，Spring 将该对象提前曝光到 SingeltonFacoties 中。</p>
+<pre><code>* A 完成 createBeanInstance ，并且提前曝光到 SingeltonFacoties 中
+* A 进行第二步，发现需要依赖 B，尝试获取 B
+* B 开始创建，B 完成 createBeanInstance，发现需要依赖 A，尝试获取 A：先尝试从 SingletonObjects 中获取，发现不存在，因为 A 未初始化完全；再尝试从 earlySingletonObjects 中获取；再去 SingeltonFacoties 中获取，此时 B 获取 A，并将 A 放入 earlySingletonObjects 中，再删除 A 在 SingeltonFacoties 中对应的 ObjectFactory。
+* B 获取 A，顺利完成第二、三步，并将初始化完成的 B 放入 SingletonObjects 中。
+* 此时返回创建 A，A 可获取 B，顺利完成第二、三步，A 初始化完成， 将 A 放入 SingletonObjects 中。</code></pre><p>注意：Spring 中循环依赖有 2 种：</p>
+<pre><code>* 构造器循环依赖：因为提前曝光到 SingletonFactories 中的前提是需要执行构造方法，所以使用 “三级缓存” 无法解决
+* setter 循环依赖</code></pre><p>总结</p>
+<pre><code>* 尽量不要使用基于构造器的 DI，使用基于 setter 的 DI
+* 使用 @Autowired 注解，让 Spring 决定合适的时机</code></pre>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/技术总览/" rel="tag"># 技术总览</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/02/10/技术总览/技术总览/" rel="next" title="技术总览">
+                  <i class="fa fa-chevron-left"></i> 技术总览
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/02/15/技术总览/系统设计_常用框架/Spring-AOP/" rel="prev" title="Spring AOP">
+                  Spring AOP <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ugia</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#IOC-概念"><span class="nav-number">1.</span> <span class="nav-text">IOC 概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖注入-Dependency-Injection-DI"><span class="nav-number">2.</span> <span class="nav-text">依赖注入(Dependency Injection,DI)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IOC-和-DI-的关系"><span class="nav-number">3.</span> <span class="nav-text">IOC 和 DI 的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IOC-容器的初始化过程"><span class="nav-number">4.</span> <span class="nav-text">IOC 容器的初始化过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IOC-加载过程"><span class="nav-number">5.</span> <span class="nav-text">IOC 加载过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BeanFactory-和-ApplicationContext"><span class="nav-number">6.</span> <span class="nav-text">BeanFactory 和 ApplicationContext</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getBean-代码逻辑"><span class="nav-number">7.</span> <span class="nav-text">getBean 代码逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-循环依赖"><span class="nav-number">8.</span> <span class="nav-text">Spring 循环依赖</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ugia</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="编程式事务和声明式事务编程式事务：指的是通过编码方式实现事务，类似JDBC编程实现事务管理，比如jdbcTemplate、TransactionalTemplate。声明式事务：1）XML实现 2）@Transactional 注解实现   事务方式 优点 缺点    编程式事务 显示调用，不易出错 侵入式代码，编码量大   声明式事务 简洁，对代码侵入少 隐藏实现细节，出错不易定位">
+<meta name="keywords" content="技术总览">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring 事务">
+<meta property="og:url" content="http://yoursite.com/2020/02/15/技术总览/系统设计_常用框架/Spring-事务/index.html">
+<meta property="og:site_name" content="凡星一点">
+<meta property="og:description" content="编程式事务和声明式事务编程式事务：指的是通过编码方式实现事务，类似JDBC编程实现事务管理，比如jdbcTemplate、TransactionalTemplate。声明式事务：1）XML实现 2）@Transactional 注解实现   事务方式 优点 缺点    编程式事务 显示调用，不易出错 侵入式代码，编码量大   声明式事务 简洁，对代码侵入少 隐藏实现细节，出错不易定位">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-15T13:03:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring 事务">
+<meta name="twitter:description" content="编程式事务和声明式事务编程式事务：指的是通过编码方式实现事务，类似JDBC编程实现事务管理，比如jdbcTemplate、TransactionalTemplate。声明式事务：1）XML实现 2）@Transactional 注解实现   事务方式 优点 缺点    编程式事务 显示调用，不易出错 侵入式代码，编码量大   声明式事务 简洁，对代码侵入少 隐藏实现细节，出错不易定位">
+  <link rel="canonical" href="http://yoursite.com/2020/02/15/技术总览/系统设计_常用框架/Spring-事务/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Spring 事务 | 凡星一点</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凡星一点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-booklist">
+      
+    
+
+    <a href="/booklist/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>书单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/15/技术总览/系统设计_常用框架/Spring-事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Spring 事务
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-15 14:18:26 / 修改时间：21:03:59" itemprop="dateCreated datePublished" datetime="2020-02-15T14:18:26+08:00">2020-02-15</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/" itemprop="url" rel="index"><span itemprop="name">技术总览</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/常用框架/" itemprop="url" rel="index"><span itemprop="name">常用框架</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="编程式事务和声明式事务"><a href="#编程式事务和声明式事务" class="headerlink" title="编程式事务和声明式事务"></a>编程式事务和声明式事务</h4><p>编程式事务：指的是通过编码方式实现事务，类似JDBC编程实现事务管理，比如jdbcTemplate、TransactionalTemplate。<br>声明式事务：1）XML实现 2）@Transactional 注解实现</p><table>
+<thead>
+<tr>
+<th>事务方式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>编程式事务</td>
+<td>显示调用，不易出错</td>
+<td>侵入式代码，编码量大</td>
+</tr>
+<tr>
+<td>声明式事务</td>
+<td>简洁，对代码侵入少</td>
+<td>隐藏实现细节，出错不易定位</td>
+</tr>
+</tbody></table><a id="more"></a>
+
+<h4 id="Spring事务管理"><a href="#Spring事务管理" class="headerlink" title="Spring事务管理"></a>Spring事务管理</h4><p>Spring 事务的本质是基于数据库对事务的支持，没有数据库对事务的支持，Spring 本身无法提供事务管理功能。<br>Spring 事务通过 AOP 动态代理来是实现。<br>通常先在配置文件中开启事务，然后通过 xml 文件或者注解配置执行方法，在调用方法时，Spring 会自动生成代理，在调用前设置事务操作，调用方法后进行事务回滚或者提交操作。</p>
+<h4 id="Spring-中事务隔离级别"><a href="#Spring-中事务隔离级别" class="headerlink" title="Spring 中事务隔离级别"></a>Spring 中事务隔离级别</h4><table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ISOLATION_DEFAULT（默认)</td>
+<td>这是默认值，表示使用底层数据库的默认隔离级别。</td>
+</tr>
+<tr>
+<td>ISOLATION_READ_UNCOMMITTED（读未提交)</td>
+<td>该隔离级别表示一个事务可以读取另一个事务修改但还没有提交的数据，该级别不能防止脏读和不可重复读，因此很少使用该隔离级别</td>
+</tr>
+<tr>
+<td>ISOLATION_READ_COMMITTED（读可提交）</td>
+<td>该隔离级别表示一个事务只能读取另一个事务已经提交的数据。该级别可以防止脏读，这也是大多数情况下的推荐值</td>
+</tr>
+<tr>
+<td>ISOLATION_REPEATABLE_READ（可重复读）</td>
+<td>该隔离级别表示一个事务在整个过程中可以多次重复执行某个查询，并且每次返回的记录都相同。即使在多次查询之间有新增的数据满足该查询，这些新增的记录也会被忽略。该级别可以防止脏读和不可重复读</td>
+</tr>
+<tr>
+<td>ISOLATION_SERIALIZABLE（可串行化）</td>
+<td>所有的事务依次逐个执行，这样事务之间就完全不可能产生干扰，也就是说，该级别可以防止脏读、不可重复读以及幻读。但是，这将严重影响程序的性能，通常情况下也不会用到该级别</td>
+</tr>
+</tbody></table>
+<h4 id="Spring-七种事务传播类型"><a href="#Spring-七种事务传播类型" class="headerlink" title="Spring 七种事务传播类型"></a>Spring 七种事务传播类型</h4><pre><code>* PROPAGATION_REQUIRED（required）
+    如果当前事务存在，方法将会在该事务中运行。否则，会启动一个新的事务。
+
+* PROPAGATION_SUPPORTS（support）
+    表示支持当前事务，如果当前没有事务，就以无事务方式执行。
+
+* PROPAGATION_MANDATORY（mandatory）
+    表示使用当前的事务，如果当前没有事务，就抛出异常。
+
+* PROPAGATION_REQUIRES_NEW（required_new）
+    表示新建事务，如果当前存在事务，把当前事务挂起。
+
+* PROPAGATION_NOT_SUPPORTED（not_support）
+    表示以无事务方式执行操作，如果当前存在事务，就把当前事务挂起。
+
+* PROPAGATION_NEVER（never）
+    表示以无事务方式执行，如果当前存在事务，则抛出异常。
+
+* PROPAGATION_NESTED（nested）
+    如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与PROPAGATION_REQUIRED类似的操作。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">StudentServiceImplA implements StudentService&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    studentDao;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    studentService;</span><br><span class="line"></span><br><span class="line">    @Transactional(required) //事务传播特性为 requried</span><br><span class="line">    insertA()&#123;</span><br><span class="line">        //...对数据库操作，插入 A 数据</span><br><span class="line"></span><br><span class="line">        studentService.insertB();// 插入 B 数据</span><br><span class="line"></span><br><span class="line">        //..i/o 异常</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">StudentServiceImplB implements StudentService&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    studentDao;</span><br><span class="line"></span><br><span class="line">    @Transactional</span><br><span class="line">    insertB()&#123;</span><br><span class="line"></span><br><span class="line">        //...对数据库操作，插入 B 数据</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>StudentServiceImplB 中 insertB() 中传播类型如果是 required，数据库中既没有 A 数据，也没有 B 数据；
+（insertA() 和 insertB() 属于同一个事务，发生异常，事务回滚）
+
+StudentServiceImplB 中 insertB() 中传播类型如果是 required_new，数据库中没有 A 数据，但是有 B 数据；
+
+（insertB() 创建了一个新事务，insertA() 中发生异常，事务回滚）
+
+StudentServiceImplB 中 insertB() 中传播类型如果是 not_supported，数据库中没有 A 数据，但是有 B 数据
+
+（insertB() 以非事务方式执行，执行 insertA() 的事务回滚，insertB()中不会发生回滚）
+
+注意：insertB() 为何要放入 StudentServiceImplB 中？
+
+Spring 的事务机制是使用 AOP 代理实现的。
+
+如果在 StudentServiceImplA 中使用 insertB() ，insertA() 中在调用 insertB() 是通过当前对象来调用 doB() 的，而不是通过代理来调用 doB() 的，此时 doB() 上加事务注解就失效了。</code></pre>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/技术总览/" rel="tag"># 技术总览</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/02/15/技术总览/系统设计_常用框架/Spring-AOP/" rel="next" title="Spring AOP">
+                  <i class="fa fa-chevron-left"></i> Spring AOP
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/02/15/技术总览/系统设计_常用框架/Spring中Bean的作用域与生命周期/" rel="prev" title="Spring中Bean的作用域与生命周期">
+                  Spring中Bean的作用域与生命周期 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ugia</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#编程式事务和声明式事务"><span class="nav-number">1.</span> <span class="nav-text">编程式事务和声明式事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring事务管理"><span class="nav-number">2.</span> <span class="nav-text">Spring事务管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-中事务隔离级别"><span class="nav-number">3.</span> <span class="nav-text">Spring 中事务隔离级别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-七种事务传播类型"><span class="nav-number">4.</span> <span class="nav-text">Spring 七种事务传播类型</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ugia</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

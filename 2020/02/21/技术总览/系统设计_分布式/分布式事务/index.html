@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="分布式事务分布式事务指事务的操作位于不同的节点上，需要保证事务的ACID特性。* 2PC * TCC * 本地消息表 * MQ事务消息2PC两阶段提交（Two-phase Commit，2PC）是基于分布式架构下的所有节点在进行事务提交时保持一致性而设计的一种算法。在分布式系统中，每个节点虽然可以知晓自己的操作成功或者失败，却无法知道其他节点的操作成功或失败。">
+<meta name="keywords" content="技术总览">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式事务">
+<meta property="og:url" content="http://yoursite.com/2020/02/21/技术总览/系统设计_分布式/分布式事务/index.html">
+<meta property="og:site_name" content="凡星一点">
+<meta property="og:description" content="分布式事务分布式事务指事务的操作位于不同的节点上，需要保证事务的ACID特性。* 2PC * TCC * 本地消息表 * MQ事务消息2PC两阶段提交（Two-phase Commit，2PC）是基于分布式架构下的所有节点在进行事务提交时保持一致性而设计的一种算法。在分布式系统中，每个节点虽然可以知晓自己的操作成功或者失败，却无法知道其他节点的操作成功或失败。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/2pc.jpg">
+<meta property="og:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/2pc2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF.jpg">
+<meta property="og:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/rockteMq01.jpg">
+<meta property="og:updated_time" content="2020-03-01T14:04:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式事务">
+<meta name="twitter:description" content="分布式事务分布式事务指事务的操作位于不同的节点上，需要保证事务的ACID特性。* 2PC * TCC * 本地消息表 * MQ事务消息2PC两阶段提交（Two-phase Commit，2PC）是基于分布式架构下的所有节点在进行事务提交时保持一致性而设计的一种算法。在分布式系统中，每个节点虽然可以知晓自己的操作成功或者失败，却无法知道其他节点的操作成功或失败。">
+<meta name="twitter:image" content="http://yoursite.com/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/2pc.jpg">
+  <link rel="canonical" href="http://yoursite.com/2020/02/21/技术总览/系统设计_分布式/分布式事务/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>分布式事务 | 凡星一点</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凡星一点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-booklist">
+      
+    
+
+    <a href="/booklist/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>书单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/技术总览/系统设计_分布式/分布式事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">分布式事务
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-21 21:10:54" itemprop="dateCreated datePublished" datetime="2020-02-21T21:10:54+08:00">2020-02-21</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-01 22:04:36" itemprop="dateModified" datetime="2020-03-01T22:04:36+08:00">2020-03-01</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/" itemprop="url" rel="index"><span itemprop="name">技术总览</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术总览/系统设计/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><p>分布式事务指事务的操作位于不同的节点上，需要保证事务的ACID特性。</p><pre><code>* 2PC
+* TCC
+* 本地消息表
+* MQ事务消息</code></pre><h3 id="2PC"><a href="#2PC" class="headerlink" title="2PC"></a>2PC</h3><p>两阶段提交（Two-phase Commit，2PC）是基于分布式架构下的所有节点在进行事务提交时保持一致性而设计的一种算法。</p><p>在分布式系统中，每个节点虽然可以知晓自己的操作成功或者失败，却无法知道其他节点的操作成功或失败。</p><a id="more"></a>
+
+
+<p>当一个节点跨域多个节点时，为了保证事务的 ACID 特性，需要引入一个协调者（Coordinator）来统一掌握所有节点（参与者）的操作结果并最终指示这些节点是否要把操作结果真正提交。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>参与者将操作成败通知协调者，再由协调者根据所有参与者反馈情况决定各参与者是否提交操作还是终止操作。</p>
+<h4 id="2个阶段"><a href="#2个阶段" class="headerlink" title="2个阶段"></a>2个阶段</h4><ul>
+<li><p>阶段1：请求阶段（commit-request phase）/ 表决阶段（voting phase）</p>
+<ul>
+<li><p>协调者节点向所有参与者节点询问是否可以执行提交操作，并开始等待各参与者节点的响应。</p>
+</li>
+<li><p>参与者节点执行询问发起为止的所有事务操作</p>
+</li>
+<li><p>各参与者节点响应协调者发起的询问 </p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/2pc.jpg" alt="2pc"></p>
+<ul>
+<li><p>阶段2：提交阶段（commit phase）</p>
+<p>  如果事务在每个参与者上都执行成功，事务协调者发送通知让参与者提交事务；否则，协调者发送通知让参与者回滚事务。</p>
+</li>
+</ul>
+<p>需要注意的是，在准备阶段，参与者执行了事务，但是还未提交。只有在提交阶段接收到协调者发来的通知后，才进行提交或者回滚。<br><img src="/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/2pc2.jpg" alt="2pc2"></p>
+<h4 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h4><ul>
+<li>同步阻塞</li>
+</ul>
+<p>所有事务参与者在等待其它参与者响应的时候都处于同步阻塞状态，无法进行其它操作。</p>
+<ul>
+<li>单点问题</li>
+</ul>
+<p>协调者在 2PC 中起到非常大的作用，发生故障将会造成很大影响。特别是在阶段二发生故障，所有参与者会一直等待，无法完成其它操作。</p>
+<ul>
+<li>数据不一致</li>
+</ul>
+<p>在阶段二，如果协调者只发送了部分 Commit 消息，此时网络发生异常，那么只有部分参与者接收到 Commit 消息，也就是说只有部分参与者提交了事务，使得系统数据不一致。</p>
+<ul>
+<li>太过保守</li>
+</ul>
+<p>任意一个节点失败就会导致整个事务失败，没有完善的容错机制。</p>
+<h3 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h3><p>TCC 即补偿事务，其实就是采用的补偿机制，其核心思想是：针对每个操作，都要注册一个与其对应的确认和补偿（撤销）操作。它分为三个阶段：</p>
+<pre><code>* Try 阶段主要是对业务系统做检测及资源预留；
+* Confirm 阶段主要是对业务系统做确认提交，Try阶段执行成功并开始执行 Confirm阶段时，默认 Confirm阶段是不会出错的。即：只要Try成功，Confirm一定成功；
+* Cancel 阶段主要是在业务执行错误，需要回滚的状态下执行的业务取消，预留资源释放。
+
+举个例子，假入 Bob 要向 Smith 转账，思路大概是： 我们有一个本地方法，里面依次调用
+
+首先在 Try 阶段，要先调用远程接口把 Smith 和 Bob 的钱给冻结起来。
+在 Confirm 阶段，执行远程调用的转账的操作，转账成功进行解冻。
+如果第2步执行成功，那么转账成功，如果第二步执行失败，则调用远程冻结接口对应的解冻方法 (Cancel)。</code></pre><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>跟 2PC 比起来，实现以及流程相对简单了一些，但数据的一致性比 2PC 也要差一些</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>缺点还是比较明显的，在2,3步中都有可能失败。TCC 属于应用层的一种补偿方式，所以需要程序员在实现的时候多写很多补偿的代码，在一些场景中，一些业务流程可能用 TCC 不太好定义及处理。</p>
+<h3 id="本地消息表"><a href="#本地消息表" class="headerlink" title="本地消息表"></a>本地消息表</h3><p>此方案的核心是将需要分布式处理的任务通过消息日志的方式来异步执行。消息日志可以存储到本地文本、数据库或消息队列，再通过业务规则自动或人工发起重试。人工重试更多的是应用于支付场景，通过对账系统对事后问题的处理。</p>
+<p>本地消息表与业务数据表处于同一个数据库中，这样就能利用本地事务来保证在对这两个表的操作满足事务特性，并且使用了消息队列来保证最终一致性。</p>
+<pre><code>* 在分布式事务操作的一方完成写业务数据的操作之后向本地消息表发送一个消息，本地事务能保证这个消息一定会被写入本地消息表中。
+* 之后将本地消息表中的消息转发到 Kafka 等消息队列中，如果转发成功则将消息从本地消息表中删除，否则继续重新转发。
+* 在分布式事务操作的另一方从消息队列中读取一个消息，并执行消息中的操作。
+* 如果是业务上面的失败，可以给生产方发送一个业务补偿消息，通知生产方进行回滚等操作</code></pre><p><img src="/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8.jpg" alt="本地消息表.jpg"><br>这种方案遵循 BASE 理论，采用的是最终一致性，笔者认为是这几种方案里面比较适合实际业务场景的，即不会出现像 2PC 那样复杂的实现(当调用链很长的时候，2PC的可用性是非常低的)，也不会像TCC那样可能出现确认或者回滚不了的情况。</p>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>一种非常经典的实现，避免了分布式事务，实现了最终一致性。在 .NET中 有现成的解决方案。</p>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>消息表会耦合到业务系统中，如果没有封装好的解决方案，会有很多杂活需要处理。</p>
+<h3 id="MQ-事务消息"><a href="#MQ-事务消息" class="headerlink" title="MQ 事务消息"></a>MQ 事务消息</h3><p>有一些第三方的MQ是支持事务消息的，比如RocketMQ，他们支持事务消息的方式也是类似于采用的二阶段提交，但是市面上一些主流的MQ都是不支持事务消息的，比如 RabbitMQ 和 Kafka 都不支持。</p>
+<p>以阿里的 RocketMQ 中间件为例，其思路大致为：</p>
+<pre><code>第一阶段Prepared消息，会拿到消息的地址。 第二阶段执行本地事务。
+第三阶段通过第一阶段拿到的地址去访问消息，消息接受者就能使用这个消息。</code></pre><p><img src="/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF.jpg" alt="MQ事务消息"></p>
+<p>也就是说在业务方法内要想消息队列提交两次请求，一次发送消息和一次确认消息。如果确认消息发送失败了RocketMQ会定期扫描消息集群中的事务消息，这时候发现了Prepared消息，它会向消息发送者确认，所以生产方需要实现一个check接口，RocketMQ会根据发送端设置的策略来决定是回滚还是继续发送确认消息。这样就保证了消息发送与本地事务同时成功或同时失败。<br><img src="/img/%E6%8A%80%E6%9C%AF%E6%80%BB%E8%A7%88/rockteMq01.jpg" alt="rockteMq01"></p>
+<h4 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h4><p>实现了最终一致性，不需要依赖本地数据库事务。</p>
+<h4 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h4><p>实现难度大，主流 MQ 不支持，RocketMQ 事务消息部分代码也未开源。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/技术总览/" rel="tag"># 技术总览</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/02/21/Find-Pivot-Index-724/" rel="next" title="Find Pivot Index(724)">
+                  <i class="fa fa-chevron-left"></i> Find Pivot Index(724)
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/02/24/Maximize-Distance-to-Closest-Person-849/" rel="prev" title="Maximize Distance to Closest Person(849)">
+                  Maximize Distance to Closest Person(849) <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ugia</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务"><span class="nav-number">1.</span> <span class="nav-text">分布式事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2PC"><span class="nav-number">2.</span> <span class="nav-text">2PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2个阶段"><span class="nav-number">2.2.</span> <span class="nav-text">2个阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存在的问题"><span class="nav-number">2.3.</span> <span class="nav-text">存在的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCC"><span class="nav-number">3.</span> <span class="nav-text">TCC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地消息表"><span class="nav-number">4.</span> <span class="nav-text">本地消息表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点-1"><span class="nav-number">4.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点-1"><span class="nav-number">4.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQ-事务消息"><span class="nav-number">5.</span> <span class="nav-text">MQ 事务消息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点-2"><span class="nav-number">5.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点-2"><span class="nav-number">5.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ugia</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

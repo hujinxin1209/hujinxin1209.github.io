@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="go 速查github: the way to go  1234567891011121314151617181920 /******************************************************************************  * Go 编译器命令  ***********************************************">
+<meta name="keywords" content="go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go 速查">
+<meta property="og:url" content="http://yoursite.com/2019/11/21/go-速查/index.html">
+<meta property="og:site_name" content="凡星一点">
+<meta property="og:description" content="go 速查github: the way to go  1234567891011121314151617181920 /******************************************************************************  * Go 编译器命令  ***********************************************">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-24T00:44:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go 速查">
+<meta name="twitter:description" content="go 速查github: the way to go  1234567891011121314151617181920 /******************************************************************************  * Go 编译器命令  ***********************************************">
+  <link rel="canonical" href="http://yoursite.com/2019/11/21/go-速查/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>go 速查 | 凡星一点</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凡星一点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-booklist">
+      
+    
+
+    <a href="/booklist/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>书单</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    
+  <div class="popup search-popup">
+  <div class="search-header">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <div class="search-input-wrapper">
+      <input autocomplete="off" autocorrect="off" autocapitalize="none"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="search-input">
+    </div>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+  <div id="search-result"></div>
+</div>
+
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/21/go-速查/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">go 速查
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-21 21:54:13" itemprop="dateCreated datePublished" datetime="2019-11-21T21:54:13+08:00">2019-11-21</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-24 08:44:32" itemprop="dateModified" datetime="2019-11-24T08:44:32+08:00">2019-11-24</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/go/go-笔记/" itemprop="url" rel="index"><span itemprop="name">go 笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="go-速查"><a href="#go-速查" class="headerlink" title="go 速查"></a>go 速查</h3><p><a href="https://github.com/unknwon/the-way-to-go_ZH_CN/" target="_blank" rel="noopener">github: the way to go </a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> /******************************************************************************</span><br><span class="line">  * Go 编译器命令</span><br><span class="line">  *****************************************************************************/</span><br><span class="line">go command [arguments]                              // go 命令 [参数]</span><br><span class="line">go build                                            // 编译包和依赖包</span><br><span class="line">go clean                                            // 移除对象和缓存文件</span><br><span class="line">go doc                                              // 显示包的文档</span><br><span class="line">go env                                              // 打印go的环境变量信息</span><br><span class="line">go bug                                              // 报告bug</span><br><span class="line">go fix                                              // 更新包使用新的api</span><br><span class="line">go fmt                                              // 格式规范化代码</span><br><span class="line">go generate                                         // 通过处理资源生成go文件</span><br><span class="line">go get                                              // 下载并安装包及其依赖</span><br><span class="line">go install                                          // 编译和安装包及其依赖</span><br><span class="line">go list                                             // 列出所有包</span><br><span class="line">go run                                              // 编译和运行go程序</span><br><span class="line">go test                                             // 测试</span><br><span class="line">go tool                                             // 运行给定的go工具</span><br><span class="line">go version                                          // 显示go当前版本</span><br><span class="line">go vet                                              // 发现代码中可能的错误</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line">/*******************************************************************************</span><br><span class="line"> * Hello World</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">// main.go</span><br><span class="line">package main                                        // 包名</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;                                        // 导入fmt包</span><br><span class="line"></span><br><span class="line">func main() &#123;                                       // 主函数</span><br><span class="line">    fmt.Println(&quot;Hello World&quot;)                      // 打印输出</span><br><span class="line">&#125;</span><br><span class="line">// go run main.go                                   // 直接运行</span><br><span class="line">// go build &amp;&amp; ./main                               // 先编译成二进制文件再运行</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 操作符</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">// 算数操作符</span><br><span class="line">+ - * / %                                           // 加 减 乘 除 取余</span><br><span class="line">&amp; | ^ &amp;^                                            // 位与 位或 位异或 位与非</span><br><span class="line">&lt;&lt; &gt;&gt;                                               // 左移 右移</span><br><span class="line">// 比较操作</span><br><span class="line">== !=                                               // 等于 不等于</span><br><span class="line">&lt; &lt;=                                                // 小于 小于等于</span><br><span class="line">&gt; &gt;=                                                // 大于 大于等于</span><br><span class="line">// 逻辑操作</span><br><span class="line">&amp;&amp; || !                                             // 逻辑与 逻辑或 逻辑非</span><br><span class="line">// 其他</span><br><span class="line">&amp; * &lt;-                                              // 地址 指针引用 通道操作</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 声明</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">a := 1                                              // 直接给一个未声明的变量赋值</span><br><span class="line">var b int                                           // var 变量名 数据类型 来声明</span><br><span class="line">var c float64</span><br><span class="line">// 注意：使用var声明过的变量不可再使用 := 赋值</span><br><span class="line">a = 2</span><br><span class="line">const d = 1                                         // 常量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 数据类型</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">s := &quot;hello&quot;                                       // 字符</span><br><span class="line">a := 1                                             // int</span><br><span class="line">b := 1.2                                           // float64</span><br><span class="line">c := 1 + 5i                                        // complex128</span><br><span class="line">// 数组</span><br><span class="line">arr1 := [3]int&#123;4, 5, 6&#125;                           // 手动指定长度</span><br><span class="line">arr2 := [...]int&#123;1, 2, 3&#125;                         // 由golang自动计算长度</span><br><span class="line">// 切片</span><br><span class="line">sliceInt := []int&#123;1, 2&#125;                           // 不指定长度</span><br><span class="line">sliceByte := []byte(&quot;hello&quot;)</span><br><span class="line">// 指针</span><br><span class="line">a := 1</span><br><span class="line">point := &amp;a                                      // 将a的地址赋给point</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 流程控制</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">// for</span><br><span class="line">i := 10</span><br><span class="line">for i &gt; 0 &#123;</span><br><span class="line">    println(i--)</span><br><span class="line">&#125;</span><br><span class="line">// if else</span><br><span class="line">if i == 10 &#123;</span><br><span class="line">    println(&quot;i == 10&quot;)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    println(&quot;i != 10&quot;)</span><br><span class="line">&#125;</span><br><span class="line">// switch</span><br><span class="line">switch i &#123;</span><br><span class="line">case 10:</span><br><span class="line">    println(&quot;i == 10&quot;)</span><br><span class="line">default:</span><br><span class="line">    println(&quot;i != 10&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 函数</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">// 以func关键字声明</span><br><span class="line">func test() &#123;&#125;</span><br><span class="line"></span><br><span class="line">f := func() &#123;println(&quot;Lambdas function&quot;)&#125;     // 匿名函数</span><br><span class="line">f()</span><br><span class="line"></span><br><span class="line">func get() (a,b string) &#123;                    // 函数多返回值</span><br><span class="line">    return &quot;a&quot;, &quot;b&quot;</span><br><span class="line">&#125;</span><br><span class="line">a, b := get()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 结构体</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">// golang中没有class只有struct</span><br><span class="line">type People struct &#123;</span><br><span class="line">  Age int                                  // 大写开头的变量在包外可以访问</span><br><span class="line">  name string                              // 小写开头的变量仅可在本包内访问</span><br><span class="line">&#125;</span><br><span class="line">p1 := People&#123;25, &quot;Kaven&quot;&#125;                 // 必须按照结构体内部定义的顺序</span><br><span class="line">p2 := People&#123;name: &quot;Kaven&quot;, age: 25&#125;      // 若不按顺序则需要指定字段</span><br><span class="line"></span><br><span class="line">// 也可以先不赋值</span><br><span class="line">p3 := new(People)</span><br><span class="line">p3.Age = 25</span><br><span class="line">p3.name = &quot;Kaven&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 方法</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">// 方法通常是针对一个结构体来说的</span><br><span class="line">type Foo struct &#123;</span><br><span class="line">  a int</span><br><span class="line">&#125;</span><br><span class="line">                                        // 值接收者</span><br><span class="line">func (f Foo) test() &#123;</span><br><span class="line">  f.a = 1                              // 不会改变原来的值</span><br><span class="line">&#125;</span><br><span class="line">                                      // 指针接收者</span><br><span class="line">func (f *Foo) test() &#123;</span><br><span class="line">  f.a = 1                            // 会改变原值</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * go 协程</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">go func() &#123;</span><br><span class="line">    time.Sleep(10 * time.Second)</span><br><span class="line">    println(&quot;hello&quot;)</span><br><span class="line">&#125;()                                // 不会阻塞代码的运行 代码会直接向下运行</span><br><span class="line">// channel 通道</span><br><span class="line">c := make(chan int)</span><br><span class="line">// 两个协程间可以通过chan通信</span><br><span class="line">go func() &#123;c &lt;- 1&#125;()              // 此时c会被阻塞 直到值被取走前都不可在塞入新值</span><br><span class="line">go func() &#123;println(&lt;-c)&#125;()</span><br><span class="line">// 带缓存的channel</span><br><span class="line">bc := make(chan int, 2)</span><br><span class="line">go func() &#123;c &lt;- 1; c &lt;-2&#125;()      // c中可以存储声明时所定义的缓存大小的数据，这里是2个</span><br><span class="line">go func() &#123;println(&lt;-c)&#125;()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line"> * 接口</span><br><span class="line"> ******************************************************************************/</span><br><span class="line">// go的接口为鸭子类型，即只要你实现了接口中的方法就实现了该接口</span><br><span class="line">type Reader interface &#123;</span><br><span class="line">    Reading()                  // 仅需实现Reading方法就实现了该接口</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type As struct &#123;&#125;</span><br><span class="line">func (a As) Reading() &#123;&#125;      // 实现了Reader接口</span><br><span class="line"></span><br><span class="line">type Bs struct &#123;&#125;</span><br><span class="line">func (b Bs) Reading() &#123;&#125;      // 也实现了Reader接口</span><br><span class="line">func (b Bs) Closing() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/go/" rel="tag"># go</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/21/搜索旋转排序数组（33）/" rel="next" title="搜索旋转排序数组（33）">
+                  <i class="fa fa-chevron-left"></i> 搜索旋转排序数组（33）
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/11/23/在排序数组中查找元素的第一个和最后一个位置（34）/" rel="prev" title="在排序数组中查找元素的第一个和最后一个位置（34）">
+                  在排序数组中查找元素的第一个和最后一个位置（34） <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ugia</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-速查"><span class="nav-number">1.</span> <span class="nav-text">go 速查</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ugia</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+-->
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
