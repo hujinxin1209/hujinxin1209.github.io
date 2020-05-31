@@ -261,6 +261,362 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/28/机器人的运动范围/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/28/机器人的运动范围/" class="post-title-link" itemprop="url">机器人的运动范围</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-28 19:36:55 / 修改时间：20:45:43" itemprop="dateCreated datePublished" datetime="2019-10-28T19:36:55+08:00">2019-10-28</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="机器人的运动范围"><a href="#机器人的运动范围" class="headerlink" title="机器人的运动范围"></a>机器人的运动范围</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">// 地上有一个m行n列的方格。</span><br><span class="line">// 一个机器人从坐标（0，0）的格子开始移动，它每次可以向左、右、上、下移动一个，</span><br><span class="line">// 但不能进入行坐标和列坐标的数位之和 大于k的格子。</span><br><span class="line">// 当k为18时，机器人能进入方格（35，37） 3+5+3+7=18。</span><br><span class="line">// 请问该机器人能够到达多少个格子？</span><br><span class="line"></span><br><span class="line">public class A54_MovingCount &#123;</span><br><span class="line">    public static int movingCount(int threshold, int rows, int cols)&#123;</span><br><span class="line">        if(threshold &lt; 0 || rows &lt; 0 || cols &lt; 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        boolean[] visited = new boolean[rows * cols];</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; rows * cols; i++)&#123;</span><br><span class="line">            visited[i] = false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int count = movingCountCore(threshold, rows, cols, 0, 0, visited);</span><br><span class="line">        return count;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int movingCountCore(int threshold, int rows, int cols, int row,</span><br><span class="line">                                  int col, boolean[] visited)&#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        if(check(threshold, rows, cols, row, col, visited))&#123;</span><br><span class="line">            visited[row*cols+col] = true;</span><br><span class="line">            count = 1 + movingCountCore(threshold,rows,cols,row-1,col,visited)+</span><br><span class="line">                    movingCountCore(threshold,rows,cols,row+1,col,visited)+</span><br><span class="line">                    movingCountCore(threshold,rows,cols,row,col-1,visited)+</span><br><span class="line">                    movingCountCore(threshold,rows,cols,row,col+1,visited);</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int getDigitSum(int number)&#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        while(number &gt; 0)&#123;</span><br><span class="line">            sum += number % 10;</span><br><span class="line">            number /= 10;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean check(int threshold, int rows, int cols, int row,</span><br><span class="line">                                int col, boolean[] visited)&#123;</span><br><span class="line">        if(row &gt;= 0 &amp;&amp; row &lt; rows &amp;&amp; col &gt;= 0 &amp;&amp; col &lt; cols</span><br><span class="line">                &amp;&amp; getDigitSum(row) + getDigitSum(col) &lt;= threshold</span><br><span class="line">                &amp;&amp; !visited[row*cols+col])&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/27/矩阵中的路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/27/矩阵中的路径/" class="post-title-link" itemprop="url">------>矩阵中的路径</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-27 10:18:49 / 修改时间：18:24:56" itemprop="dateCreated datePublished" datetime="2019-10-27T10:18:49+08:00">2019-10-27</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="——-gt-矩阵中的路径"><a href="#——-gt-矩阵中的路径" class="headerlink" title="——&gt;矩阵中的路径"></a>——&gt;矩阵中的路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/26/旋转数组的最小数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/26/旋转数组的最小数字/" class="post-title-link" itemprop="url">旋转数组的最小数字</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-26 11:11:59 / 修改时间：16:23:36" itemprop="dateCreated datePublished" datetime="2019-10-26T11:11:59+08:00">2019-10-26</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a>旋转数组的最小数字</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">// 输入一个非递减排序数组的一个旋转，输出旋转数组的最小元素</span><br><span class="line">// 2-4-5-7-9</span><br><span class="line">// 5-7-9-2-4</span><br><span class="line">public class A07_MinNum &#123;</span><br><span class="line">	// 二分法求解(寻找变化点)</span><br><span class="line">	public static int getMin(int[] array) &#123;</span><br><span class="line">		if(array == null || array.length ==0) &#123;</span><br><span class="line">			return -1;</span><br><span class="line">		&#125;</span><br><span class="line">		if(array.length == 1 || array[array.length - 1] &gt; array[0]) &#123;</span><br><span class="line">			return array[0];</span><br><span class="line">		&#125;</span><br><span class="line">		int left = 0;</span><br><span class="line">		int right = array.length - 1;</span><br><span class="line">		while(left &lt;= right) &#123;</span><br><span class="line">			int mid = (left + right) / 2;</span><br><span class="line">			if(array[mid] &gt; array[mid+1]) &#123;</span><br><span class="line">				return array[mid+1];</span><br><span class="line">			&#125;</span><br><span class="line">			if(array[mid-1] &gt; array[mid]) &#123;</span><br><span class="line">				return array[mid];</span><br><span class="line">			&#125;</span><br><span class="line">			if(array[mid] &gt; array[0]) &#123;</span><br><span class="line">				left = mid + 1;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				right = mid - 1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 二分查找（最左下标）</span><br><span class="line">	public static int getMin2(int[] array) &#123;</span><br><span class="line">		if(array == null || array.length == 0) &#123;</span><br><span class="line">			return -1;</span><br><span class="line">		&#125;</span><br><span class="line">		int left = 0;</span><br><span class="line">		int right = array.length - 1;</span><br><span class="line">		while(left &lt; right) &#123;</span><br><span class="line">			int mid = (right + left) / 2;</span><br><span class="line">			if(array[mid] &gt; array[right]) &#123;</span><br><span class="line">				left = mid + 1;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				right = mid;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return array[left];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 若非递减数组中存在重复元素，求最小元素</span><br><span class="line">	public static int getMin3(int[] array) &#123;</span><br><span class="line">		if(array == null || array.length == 0) &#123;</span><br><span class="line">			return -1;</span><br><span class="line">		&#125;</span><br><span class="line">		int left = 0;</span><br><span class="line">		int right = array.length - 1;</span><br><span class="line">		while(left &lt; right) &#123;</span><br><span class="line">			int mid = (left + right) / 2;</span><br><span class="line">			if(array[mid] &gt; array[right]) &#123;</span><br><span class="line">				left = mid + 1;</span><br><span class="line">			&#125; else if(array[mid] &lt; array[right]) &#123;</span><br><span class="line">				right = mid;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				right--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return array[left];</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int[] array = &#123;5,7,9,2,4&#125;;</span><br><span class="line">		System.out.println(getMin(array));</span><br><span class="line">		System.out.println(getMin2(array));</span><br><span class="line">		System.out.println(getMin3(array));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/25/斐波那契数列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/25/斐波那契数列/" class="post-title-link" itemprop="url">斐波那契数列</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-25 21:06:09" itemprop="dateCreated datePublished" datetime="2019-10-25T21:06:09+08:00">2019-10-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-26 15:49:04" itemprop="dateModified" datetime="2019-10-26T15:49:04+08:00">2019-10-26</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 输入一个整数n，求费波纳茨序列第n项</span><br><span class="line">public class A08_Fibonacci &#123;</span><br><span class="line">	public static int getNum(int n) &#123;</span><br><span class="line">		int result = 0;</span><br><span class="line">		int tmp1 = 1;</span><br><span class="line">		int tmp2 = 0;</span><br><span class="line">		if(n == 0) &#123;</span><br><span class="line">			return tmp2;</span><br><span class="line">		&#125;</span><br><span class="line">		if(n == 1) &#123;</span><br><span class="line">			return tmp1;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i = 2; i &lt;= n; i++) &#123;</span><br><span class="line">			result = tmp1 + tmp2;</span><br><span class="line">			tmp2 = tmp1;</span><br><span class="line">			tmp1 = result;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static int getNum2(int n)&#123;</span><br><span class="line">		if(n &lt; 0)&#123;</span><br><span class="line">			return 0;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		if(n &lt; 3)&#123;</span><br><span class="line">			return 1;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return getNum2(n-1) + getNum2(n-2);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 1 1 2 3 5</span><br><span class="line">		System.out.println(getNum2(4));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/25/用两个栈实现队列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -776,421 +1132,6 @@
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/20/数组中重复的数字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/20/数组中重复的数字/" class="post-title-link" itemprop="url">数组中重复的数字</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-20 16:33:09 / 修改时间：17:57:44" itemprop="dateCreated datePublished" datetime="2019-10-20T16:33:09+08:00">2019-10-20</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="数组中重复的数字"><a href="#数组中重复的数字" class="headerlink" title="数组中重复的数字"></a>数组中重复的数字</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">// 0到n-1的范围内的数组中</span><br><span class="line">// 请找出数组中任意一个重复的数字</span><br><span class="line">public class A51_DuplicationInArray &#123;</span><br><span class="line">    public static int duplicate(int[] arr)&#123;</span><br><span class="line">        if(arr == null || arr.length == 0)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">            if(arr[i] &lt; 0 || arr[i] &gt; arr.length - 1)&#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">            while(arr[i] != i)&#123;</span><br><span class="line">                if(arr[i] == arr[arr[i]])&#123;</span><br><span class="line">                    return arr[i];</span><br><span class="line">                &#125; else&#123;</span><br><span class="line">                    int tmp = arr[i];</span><br><span class="line">                    arr[i] = arr[tmp];</span><br><span class="line">                    arr[tmp] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 不修改数组，找出重复数字，时间复杂度 0（nlogn）</span><br><span class="line">    public static int duplicate2(int[] arr)&#123;</span><br><span class="line">        if(arr == null || arr.length == 0)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int start = 1;</span><br><span class="line">        int end = arr.length - 1;</span><br><span class="line">        while(end &gt;= start)&#123;</span><br><span class="line">            int middle = ((end - start) &gt;&gt; 1) + start;</span><br><span class="line">            int count = countRange(arr, start, middle);</span><br><span class="line">            if(end == start)&#123;</span><br><span class="line">                if(count &gt; 1)&#123;</span><br><span class="line">                    return start; // 重复的数字</span><br><span class="line">                &#125; else&#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if(count &gt; (middle - start) + 1)&#123;</span><br><span class="line">                end = middle;</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                start = middle + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int countRange(int[] arr, int start, int end)&#123;</span><br><span class="line">        if(arr == null || arr.length == 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int count = 0;</span><br><span class="line">        for(int i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">            if(arr[i] &gt;= start &amp;&amp; arr[i] &lt;= end)&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/Singleton单例模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/19/Singleton单例模式/" class="post-title-link" itemprop="url">Singleton单例模式</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-19 19:40:12 / 修改时间：19:44:05" itemprop="dateCreated datePublished" datetime="2019-10-19T19:40:12+08:00">2019-10-19</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Singleton单例模式"><a href="#Singleton单例模式" class="headerlink" title="Singleton单例模式"></a>Singleton单例模式</h3><h4 id="饿汉式：线程安全、耗资源"><a href="#饿汉式：线程安全、耗资源" class="headerlink" title="饿汉式：线程安全、耗资源"></a>饿汉式：线程安全、耗资源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Singleton01&#123;</span><br><span class="line">	private static final Singleton01 instance = new Singleton01();</span><br><span class="line">	public static Singleton01 getInstance() &#123;</span><br><span class="line">		return instance;</span><br><span class="line">	&#125;</span><br><span class="line">	private Singleton01() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/10/19/Singleton单例模式/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/树中两个节点的最低公共祖先/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/16/树中两个节点的最低公共祖先/" class="post-title-link" itemprop="url">树中两个节点的最低公共祖先</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-16 20:18:55" itemprop="dateCreated datePublished" datetime="2019-10-16T20:18:55+08:00">2019-10-16</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-17 22:00:15" itemprop="dateModified" datetime="2019-10-17T22:00:15+08:00">2019-10-17</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="树中两个节点的最低公共祖先"><a href="#树中两个节点的最低公共祖先" class="headerlink" title="树中两个节点的最低公共祖先"></a>树中两个节点的最低公共祖先</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">// 树中两个节点的最低公共祖先</span><br><span class="line">public class A50_MinParent &#123;</span><br><span class="line">    // 二叉搜索树 : 递归调用二叉树，查找到大于n1 小于n2的节点</span><br><span class="line">    public static TreeNode getMinParent(TreeNode root, TreeNode n1, TreeNode n2)&#123;</span><br><span class="line">        if(root == null || n1 == null || n2 == null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if((root.value - n1.value) * (root.value - n2.value) &lt; 0)&#123;</span><br><span class="line">            return root;</span><br><span class="line">        &#125; else &#123; // (root.value - n1.value) * (root.value - n2.value) &gt; 0</span><br><span class="line">            TreeNode tmp = (root.value &gt; n1.value &amp;&amp; root.value &gt; n2.value) ?</span><br><span class="line">                    root.left : root.right;</span><br><span class="line">            return getMinParent(tmp, n1, n2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 普通树，但有指向父节点的指针，类似求两单链表的第一个公共点</span><br><span class="line">    // 时间复杂度0（log n) 空间复杂度0（1）</span><br><span class="line">    public static Node getMinParent2(Node n1, Node n2)&#123;</span><br><span class="line">        if(n1 == null || n2 == null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        int len1 = getLen(n1);</span><br><span class="line">        int len2 = getLen(n2);</span><br><span class="line"></span><br><span class="line">        Node longNode = len1 &gt; len2 ? n1 : n2;</span><br><span class="line">        Node shortNode = len1 &gt; len2 ? n2 : n1;</span><br><span class="line">        int diff = Math.abs(len1 - len2);</span><br><span class="line"></span><br><span class="line">        while(diff &gt; 0)&#123;</span><br><span class="line">            diff--;</span><br><span class="line">            longNode = longNode.getNext();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while(longNode.getValue() != shortNode.getValue())&#123;</span><br><span class="line">            longNode = longNode.getNext();</span><br><span class="line">            shortNode = shortNode.getNext();</span><br><span class="line">        &#125;</span><br><span class="line">        return longNode;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int getLen(Node n)&#123;</span><br><span class="line">        if(n == null)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int len = 0;</span><br><span class="line">        Node head = n;</span><br><span class="line">        while(head != null)&#123;</span><br><span class="line">            len++;</span><br><span class="line">            head = head.getNext();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return len;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 普通树，没有父节点指针</span><br><span class="line">    public static TNode getMinParent(TNode root, TNode n1, TNode n2)&#123;</span><br><span class="line">        if(root == null || n1 == null || n2 == null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        LinkedList&lt;TNode&gt; path1 = new LinkedList&lt;&gt;();</span><br><span class="line">        boolean flag1 = getPath(n1, root, path1);</span><br><span class="line"></span><br><span class="line">        LinkedList&lt;TNode&gt; path2 = new LinkedList&lt;&gt;();</span><br><span class="line">        boolean flag2 = getPath(n2, root, path2);</span><br><span class="line"></span><br><span class="line">        int sub = Math.abs(path1.size() - path2.size());</span><br><span class="line"></span><br><span class="line">        if(path1.size() &lt; path2.size())&#123;</span><br><span class="line">            LinkedList tmp = path1;</span><br><span class="line">            path1 = path2;</span><br><span class="line">            path2 = tmp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int index = 0;</span><br><span class="line">        while(index != path2.size() - 1)&#123;</span><br><span class="line">            if(((TNode) path1.get(index+sub)).value == ((TNode)path2.get(index)).value)&#123;</span><br><span class="line">                return (TNode)path1.get(index);</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean getPath(TNode node, TNode currentNode, LinkedList&lt;TNode&gt; path)&#123;</span><br><span class="line">        if(node.value == currentNode.value)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        path.push(currentNode);</span><br><span class="line"></span><br><span class="line">        boolean found = false;</span><br><span class="line"></span><br><span class="line">        TNode[] childs = node.childs;</span><br><span class="line">        if(childs != null &amp;&amp; childs.length &gt; 0)&#123;</span><br><span class="line">            for(int i = 0; i &lt; childs.length; i++)&#123;</span><br><span class="line">                if(found)&#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125; else&#123;</span><br><span class="line">                    found = getPath(node,childs[i], path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(!found)&#123;</span><br><span class="line">            path.pop();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return found;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class TNode&#123;</span><br><span class="line">    char value;</span><br><span class="line"></span><br><span class="line">    TNode childs[];</span><br><span class="line"></span><br><span class="line">    TNode(char val)&#123;</span><br><span class="line">        this.value = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/实战Java高并发程序设计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/16/实战Java高并发程序设计/" class="post-title-link" itemprop="url">实战Java高并发程序设计</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-16 19:52:17" itemprop="dateCreated datePublished" datetime="2019-10-16T19:52:17+08:00">2019-10-16</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-21 21:28:22" itemprop="dateModified" datetime="2019-10-21T21:28:22+08:00">2019-10-21</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/concurrent/" itemprop="url" rel="index"><span itemprop="name">concurrent</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="实战Java高并发程序设计"><a href="#实战Java高并发程序设计" class="headerlink" title="实战Java高并发程序设计"></a>实战Java高并发程序设计</h3><p>参考 <a href="https://github.com/guanpengchn/java-concurrent-programmin" target="_blank" rel="noopener">github笔记</a></p><h4 id="第1章-走入并行世界"><a href="#第1章-走入并行世界" class="headerlink" title="第1章　走入并行世界"></a>第1章　走入并行世界</h4><pre><code>1.1　何去何从的并行计算
-1.1.1　忘掉那该死的并行
-1.1.2　可怕的现实：摩尔定律的失效
-1.1.3　柳暗花明：不断地前进
-1.1.4　光明或是黑暗
-1.2　你必须知道的几个概念
-1.2.1　同步（Synchronous）和异步（Asynchronous）
-1.2.2　并发（Concurrency）和并行（Parallelism）
-1.2.3　临界区
-1.2.4　阻塞（Blocking）和非阻塞（Non-Blocking）
-1.2.5　死锁（Deadlock）、饥饿（Starvation）和活锁（Livelock）
-1.3　并发级别
-1.3.1　阻塞（Blocking）
-1.3.2　无饥饿（Starvation-Free）
-1.3.3　无障碍（Obstruction-Free）
-1.3.4　无锁（Lock-Free）
-1.3.5　无等待（Wait-Free）
-1.4　有关并行的两个重要定律
-1.4.1　Amdahl定律
-1.4.2　Gustafson定律
-1.4.3　Amdahl定律和Gustafson定律是否相互矛盾
-1.5　回到Java：JMM
-1.5.1　原子性（Atomicity）
-1.5.2　可见性（Visibility）
-1.5.3　有序性（Ordering）
-1.5.4　哪些指令不能重排：Happen-Before规则
-1.6　参考文献</code></pre>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/10/16/实战Java高并发程序设计/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
@@ -1228,7 +1169,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
