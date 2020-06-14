@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Longest Palindrome(409)]]></title>
+    <url>%2F2020%2F06%2F14%2FLongest-Palindrome-409%2F</url>
+    <content type="text"><![CDATA[1234567891011121314151617/*Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here.Note:Assume the length of given string will not exceed 1,010.Example:Input:&quot;abccccdd&quot;Output:7Explanation:One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.*/ 1234567891011121314func longestPalindrome(s string) int &#123; exist := make(map[byte]struct&#123;&#125;) for i := range s&#123; if _, ok := exist[s[i]]; ok&#123; delete(exist, s[i]) &#125; else&#123; exist[s[i]] = struct&#123;&#125;&#123;&#125; &#125; &#125; if len(exist) == 0&#123; return len(s) &#125; return len(s) - len(exist) + 1&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>hash table</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Happy Number(202)]]></title>
+    <url>%2F2020%2F06%2F12%2FHappy-Number-202%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516171819/*Write an algorithm to determine if a number n is &quot;happy&quot;.A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.Return True if n is a happy number, and False if not.Example: Input: 19Output: trueExplanation: 12 + 92 = 8282 + 22 = 6862 + 82 = 10012 + 02 + 02 = 1*/ 1234567891011121314func isHappy(n int) bool &#123; visited := make(map[int]struct&#123;&#125;) for&#123; if n == 1&#123; return true&#125; if _, ok := visited[n]; ok&#123; return false&#125; visited[n] = struct&#123;&#125;&#123;&#125; tmp := 0 for i := n; i &gt; 0; i = i / 10&#123; j := i % 10 tmp += j * j &#125; n = tmp &#125;&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>hash table</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Minimum Index Sum of Two Lists(599)]]></title>
     <url>%2F2020%2F06%2F07%2FMinimum-Index-Sum-of-Two-Lists-599%2F</url>
     <content type="text"><![CDATA[12345678910111213141516171819202122/*Suppose Andy and Doris want to choose a restaurant for dinner, and they both have a list of favorite restaurants represented by strings.You need to help them find out their common interest with the least list index sum. If there is a choice tie between answers, output all of them with no order requirement. You could assume there always exists an answer.Example 1:Input:[&quot;Shogun&quot;, &quot;Tapioca Express&quot;, &quot;Burger King&quot;, &quot;KFC&quot;][&quot;Piatti&quot;, &quot;The Grill at Torrey Pines&quot;, &quot;Hungry Hunter Steakhouse&quot;, &quot;Shogun&quot;]Output: [&quot;Shogun&quot;]Explanation: The only restaurant they both like is &quot;Shogun&quot;.Example 2:Input:[&quot;Shogun&quot;, &quot;Tapioca Express&quot;, &quot;Burger King&quot;, &quot;KFC&quot;][&quot;KFC&quot;, &quot;Shogun&quot;, &quot;Burger King&quot;]Output: [&quot;Shogun&quot;]Explanation: The restaurant they both like and have the least index sum is &quot;Shogun&quot; with index sum 1 (0+1).*/ 123456789101112131415161718192021func findRestaurant(list1 []string, list2 []string) []string &#123; andyMap := make(map[string]int) for k, v := range list1&#123; andyMap[v] = k &#125; minIdx := len(list1) + len(list2) ret := make([]string, 0) for k, v := range list2&#123; if value, ok := andyMap[v]; ok&#123; currIdx := k + value if currIdx &lt; minIdx&#123; ret = []string&#123;v&#125; minIdx = currIdx &#125; else if currIdx == minIdx&#123; ret = append(ret, v) &#125; &#125; &#125; return ret&#125;]]></content>
