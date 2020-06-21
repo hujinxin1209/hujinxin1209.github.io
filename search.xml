@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Set Mismatch(645)]]></title>
+    <url>%2F2020%2F06%2F20%2FSet-Mismatch-645%2F</url>
+    <content type="text"><![CDATA[1234567891011/*The set S originally contains numbers from 1 to n. But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set, which results in repetition of one number and loss of another number.Given an array nums representing the data status of this set after the error. Your task is to firstly find the number occurs twice and then find the number that is missing. Return them in the form of an array.Example 1:Input: nums = [1,2,2,4]Output: [2,3]*/ 12345678910111213141516171819func findErrorNums(nums []int) []int &#123; var ans []int exist := make(map[int]bool) for _, v := range nums&#123; if _, ok := exist[v]; ok&#123; ans = append(ans, v) &#125; else&#123; exist[v] = true &#125; &#125; n := len(nums) for n &gt; 0&#123; if !exist[n]&#123; ans = append(ans, n) &#125; n-- &#125; return ans&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>hash table</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Longest Harmonious Subsequence(594)]]></title>
+    <url>%2F2020%2F06%2F18%2FLongest-Harmonious-Subsequence-594%2F</url>
+    <content type="text"><![CDATA[12345678910/*We define a harmounious array as an array where the difference between its maximum value and its minimum value is exactly 1.Now, given an integer array, you need to find the length of its longest harmonious subsequence among all its possible subsequences.Example 1:Input: [1,3,2,2,5,2,3,7]Output: 5Explanation: The longest harmonious subsequence is [3,2,2,2,3].*/ 1234567891011121314151617181920func findLHS(nums []int) int &#123; count := make(map[int]int, len(nums)) for _, v := range nums &#123; count[v]++ &#125; rst := 0 for k, v := range count &#123; if i, ok := count[k+1]; ok &#123; rst = maxValue(rst, i+v) &#125; &#125; return rst&#125;func maxValue(a, b int) int &#123; if a &gt; b &#123; return a &#125; return b&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>hash table</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Longest Palindrome(409)]]></title>
     <url>%2F2020%2F06%2F14%2FLongest-Palindrome-409%2F</url>
     <content type="text"><![CDATA[1234567891011121314151617/*Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here.Note:Assume the length of given string will not exceed 1,010.Example:Input:&quot;abccccdd&quot;Output:7Explanation:One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.*/ 1234567891011121314func longestPalindrome(s string) int &#123; exist := make(map[byte]struct&#123;&#125;) for i := range s&#123; if _, ok := exist[s[i]]; ok&#123; delete(exist, s[i]) &#125; else&#123; exist[s[i]] = struct&#123;&#125;&#123;&#125; &#125; &#125; if len(exist) == 0&#123; return len(s) &#125; return len(s) - len(exist) + 1&#125;]]></content>
