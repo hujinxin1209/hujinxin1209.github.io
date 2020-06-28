@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Destination City(1436)]]></title>
+    <url>%2F2020%2F06%2F27%2FDestination-City-1436%2F</url>
+    <content type="text"><![CDATA[123456789101112/*You are given the array paths, where paths[i] = [cityAi, cityBi] means there exists a direct pathgoing from cityAi to cityBi. Return the destination city, that is, the city without any path outgoing to another city.It is guaranteed that the graph of paths forms a line without any loop, therefore, there willbe exactly one destination city.Example 1:Input: paths = [[&quot;London&quot;,&quot;New York&quot;],[&quot;New York&quot;,&quot;Lima&quot;],[&quot;Lima&quot;,&quot;Sao Paulo&quot;]]Output: &quot;Sao Paulo&quot;Explanation: Starting at &quot;London&quot; city you will reach &quot;Sao Paulo&quot; city which is the destination city.Your trip consist of: &quot;London&quot; -&gt; &quot;New York&quot; -&gt; &quot;Lima&quot; -&gt; &quot;Sao Paulo&quot;. 12345678910111213141516171819202122232425262728Example 2:Input: paths = [[&quot;B&quot;,&quot;C&quot;],[&quot;D&quot;,&quot;B&quot;],[&quot;C&quot;,&quot;A&quot;]]Output: &quot;A&quot;Explanation: All possible trips are:&quot;D&quot; -&gt; &quot;B&quot; -&gt; &quot;C&quot; -&gt; &quot;A&quot;.&quot;B&quot; -&gt; &quot;C&quot; -&gt; &quot;A&quot;.&quot;C&quot; -&gt; &quot;A&quot;.&quot;A&quot;.Clearly the destination city is &quot;A&quot;.*/func destCity(paths [][]string) string &#123; tmp := make(map[string]int) for _, v := range paths &#123; for i := 0; i &lt; 2; i++ &#123; tmp[v[i]]++ &#125; &#125; for _, v := range paths &#123; for i := 0; i &lt; 2; i++ &#123; if tmp[v[i]] == 1 &amp;&amp; i == 1 &#123; return v[i] &#125; &#125; &#125; return &quot;&quot;&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>array</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Count Primes(204)]]></title>
+    <url>%2F2020%2F06%2F26%2FCount-Primes-204%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627/*Count the number of prime numbers less than a non-negative number, n.Example:Input: 10Output: 4Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.*/func countPrimes(n int) int &#123; if n &lt; 2&#123; return 0 &#125; var count int notPrime := make([]bool, n) notPrime[0] = true notPrime[1] = true for i := 2; i &lt; n; i++ &#123; if notPrime[i] &#123; continue &#125; count++ for j := i * 2; j &lt; n; j += i &#123; notPrime[j] = true &#125; &#125; return count&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>hash table</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Isomorphic Strings(205)]]></title>
+    <url>%2F2020%2F06%2F26%2FIsomorphic-Strings-205%2F</url>
+    <content type="text"><![CDATA[123456789101112131415161718/*Given two strings s and t, determine if they are isomorphic.Two strings are isomorphic if the characters in s can be replaced to get t.All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.Example 1:Input: s = &quot;egg&quot;, t = &quot;add&quot;Output: trueExample 2:Input: s = &quot;foo&quot;, t = &quot;bar&quot;Output: falseExample 3:Input: s = &quot;paper&quot;, t = &quot;title&quot;Output: true*/ 12345678910111213141516171819202122func isIsomorphic(s string, t string) bool &#123; if len(s) != len(t)&#123; return false &#125; mapping := map[byte]byte&#123;&#125; mapped := map[byte]interface&#123;&#125;&#123;&#125; for i := 0; i &lt; len(s); i++&#123; if _, exit := mapping[s[i]]; !exit&#123; if _, exit := mapped[t[i]]; exit&#123; return false &#125; mapping[s[i]] = t[i] mapped[t[i]] = nil &#125; else&#123; if mapping[s[i]] != t[i]&#123; return false &#125; &#125; &#125; return true&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>hash table</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Set Mismatch(645)]]></title>
     <url>%2F2020%2F06%2F20%2FSet-Mismatch-645%2F</url>
     <content type="text"><![CDATA[1234567891011/*The set S originally contains numbers from 1 to n. But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set, which results in repetition of one number and loss of another number.Given an array nums representing the data status of this set after the error. Your task is to firstly find the number occurs twice and then find the number that is missing. Return them in the form of an array.Example 1:Input: nums = [1,2,2,4]Output: [2,3]*/ 12345678910111213141516171819func findErrorNums(nums []int) []int &#123; var ans []int exist := make(map[int]bool) for _, v := range nums&#123; if _, ok := exist[v]; ok&#123; ans = append(ans, v) &#125; else&#123; exist[v] = true &#125; &#125; n := len(nums) for n &gt; 0&#123; if !exist[n]&#123; ans = append(ans, n) &#125; n-- &#125; return ans&#125;]]></content>

@@ -261,6 +261,296 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/第一个错误版本（278）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/13/第一个错误版本（278）/" class="post-title-link" itemprop="url">第一个错误版本（278）</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-13 22:02:59 / 修改时间：22:06:55" itemprop="dateCreated datePublished" datetime="2019-11-13T22:02:59+08:00">2019-11-13</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组问题/" itemprop="url" rel="index"><span itemprop="name">数组问题</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="第一个错误版本（278）"><a href="#第一个错误版本（278）" class="headerlink" title="第一个错误版本（278）"></a>第一个错误版本（278）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。</span><br><span class="line">// 你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错</span><br><span class="line">// 思路：</span><br><span class="line">// 如果第 m 个版本出错(即 isisBadVersion(mid) == true)，</span><br><span class="line">// 则表示第一个错误的版本在 [l, m] 之间，令 r = m ；</span><br><span class="line">// 否则第一个错误的版本在 [m + 1, h] 之间，令 l = m + 1。</span><br><span class="line">// 注意:这里判断条件 l &lt; r</span><br><span class="line">public class VersionControl &#123;</span><br><span class="line">    public static int find(int n)&#123;</span><br><span class="line">        int l = 1;</span><br><span class="line">        int r = n;</span><br><span class="line">        while(l &lt; n)&#123;</span><br><span class="line">            int mid = (l + r) / 2;</span><br><span class="line">            if(isBadVersion(mid))&#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean isBadVersion(int version)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/12/二分查找（704）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/12/二分查找（704）/" class="post-title-link" itemprop="url">二分查找（704）</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-12 22:37:44 / 修改时间：22:41:15" itemprop="dateCreated datePublished" datetime="2019-11-12T22:37:44+08:00">2019-11-12</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组问题/" itemprop="url" rel="index"><span itemprop="name">数组问题</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="二分查找（704）"><a href="#二分查找（704）" class="headerlink" title="二分查找（704）"></a>二分查找（704）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target</span><br><span class="line">// 写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</span><br><span class="line">// 输入: nums = [-1,0,3,5,9,12], target = 9</span><br><span class="line">// 输出: 4</span><br><span class="line">// 解释: 9 出现在 nums 中并且下标为 4</span><br><span class="line">// 输入: nums = [-1,0,3,5,9,12], target = 2</span><br><span class="line">// 输出: -1</span><br><span class="line">// 解释: 2 不存在 nums 中因此返回 -1</span><br><span class="line">public class Search &#123;</span><br><span class="line">   public static int search(int[] nums, int target)&#123;</span><br><span class="line">       int l = 0;</span><br><span class="line">       int h = nums.length - 1;</span><br><span class="line">       while(l &lt;= h)&#123;</span><br><span class="line">           int mid = (l + h) / 2;</span><br><span class="line">           if(nums[mid] == target)&#123;</span><br><span class="line">               return mid;</span><br><span class="line">           &#125;</span><br><span class="line">           if(nums[mid] &gt; target)&#123;</span><br><span class="line">               h = mid - 1;</span><br><span class="line">           &#125; else&#123;</span><br><span class="line">               l = mid + 1;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return -1;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/寻找重复数（287）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/09/寻找重复数（287）/" class="post-title-link" itemprop="url">寻找重复数（287）</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-09 21:28:23" itemprop="dateCreated datePublished" datetime="2019-11-09T21:28:23+08:00">2019-11-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-12 22:16:12" itemprop="dateModified" datetime="2019-11-12T22:16:12+08:00">2019-11-12</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组问题/" itemprop="url" rel="index"><span itemprop="name">数组问题</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="寻找重复数（287）"><a href="#寻找重复数（287）" class="headerlink" title="寻找重复数（287）"></a>寻找重复数（287）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// 给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n）</span><br><span class="line">// 至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。</span><br><span class="line">// 输入: [1,3,4,2,2]</span><br><span class="line">// 输出: 2</span><br><span class="line">// 输入: [3,1,3,4,2]</span><br><span class="line">// 输出: 3</span><br><span class="line">// 不能更改原数组（假设数组是只读的）。</span><br><span class="line">// 只能使用额外的 O(1) 的空间。</span><br><span class="line">// 时间复杂度小于 O(n2) 。</span><br><span class="line">// 数组中只有一个重复的数字，但它可能不止重复出现一次。</span><br><span class="line">public class FindDuplicate &#123;</span><br><span class="line">    public static int find(int[] nums)&#123;</span><br><span class="line">        int l = 0;</span><br><span class="line">        int h = nums.length - 1;</span><br><span class="line">        while(l &lt;= h)&#123;</span><br><span class="line">            int mid = (h + l) / 2;</span><br><span class="line">            int cnt = 0;</span><br><span class="line">            for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">                if(nums[i] &lt;= mid)&#123;</span><br><span class="line">                    cnt++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(cnt &gt; mid)&#123;</span><br><span class="line">                h = mid - 1;</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/数组中重复的数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -966,272 +1256,11 @@ public class FindErrorNums {
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/30/打印1到最大的n位数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/30/打印1到最大的n位数/" class="post-title-link" itemprop="url">打印1到最大的n位数</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-30 20:14:19 / 修改时间：20:43:28" itemprop="dateCreated datePublished" datetime="2019-10-30T20:14:19+08:00">2019-10-30</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="打印1到最大的n位数"><a href="#打印1到最大的n位数" class="headerlink" title="打印1到最大的n位数"></a>打印1到最大的n位数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// 打印1到最大的n位数，考虑大数问题</span><br><span class="line">public class A09_PrintMaxNNumber &#123;</span><br><span class="line">	public static void print(int n) &#123;</span><br><span class="line">		int[] array = new int[n];</span><br><span class="line">		if(n &lt;= 0) &#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		printArray(array, 0);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 递归</span><br><span class="line">	public static void printArray(int[] array, int n) &#123;</span><br><span class="line">		for(int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">			if(n != array.length) &#123;</span><br><span class="line">				array[n] = i;</span><br><span class="line">				printArray(array, n + 1);</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				boolean isFirstNo0 = false;</span><br><span class="line">				for(int j = 0; j &lt; array.length; j++) &#123;</span><br><span class="line">					if(array[j] != 0) &#123;</span><br><span class="line">						System.out.print(array[j]);</span><br><span class="line">						if(!isFirstNo0) &#123;</span><br><span class="line">							isFirstNo0 = true;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						if(isFirstNo0) &#123;</span><br><span class="line">							System.out.print(array[j]);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println();</span><br><span class="line">				return;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		print(3);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/剪绳子/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/29/剪绳子/" class="post-title-link" itemprop="url">剪绳子</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-29 21:21:26 / 修改时间：21:55:19" itemprop="dateCreated datePublished" datetime="2019-10-29T21:21:26+08:00">2019-10-29</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="剪绳子"><a href="#剪绳子" class="headerlink" title="剪绳子"></a>剪绳子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// 长度为 n 的绳子，剪成 m 段，可能的最大乘积？</span><br><span class="line">// 长度为8，最大乘积为 2*3*3=18</span><br><span class="line">public class A55_MaxProductCutting &#123;</span><br><span class="line">    // 动态规划时间O(n*n) 空间O(n)</span><br><span class="line">    public static int maxCutting(int length)&#123;</span><br><span class="line">        if(length &lt; 2)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(length == 2)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(length == 3)&#123;</span><br><span class="line">            return 2;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int[] products = new int[length + 1];</span><br><span class="line">        products[0] = 0;</span><br><span class="line">        products[1] = 1;</span><br><span class="line">        products[2] = 2;</span><br><span class="line">        products[3] = 3;</span><br><span class="line">        int max = 0;</span><br><span class="line"></span><br><span class="line">        for(int i = 4; i &lt;= length; i++)&#123;</span><br><span class="line">            max = 0;</span><br><span class="line">            for(int j = 1; j &lt; i/2; j++)&#123;</span><br><span class="line">                int product = products[j] * products[i-j];</span><br><span class="line">                if(max &lt; product)&#123;</span><br><span class="line">                    max = product;</span><br><span class="line">                &#125;</span><br><span class="line">                products[i] = max;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return products[length];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/28/机器人的运动范围/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/28/机器人的运动范围/" class="post-title-link" itemprop="url">机器人的运动范围</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-28 19:36:55 / 修改时间：20:45:43" itemprop="dateCreated datePublished" datetime="2019-10-28T19:36:55+08:00">2019-10-28</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="机器人的运动范围"><a href="#机器人的运动范围" class="headerlink" title="机器人的运动范围"></a>机器人的运动范围</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">// 地上有一个m行n列的方格。</span><br><span class="line">// 一个机器人从坐标（0，0）的格子开始移动，它每次可以向左、右、上、下移动一个，</span><br><span class="line">// 但不能进入行坐标和列坐标的数位之和 大于k的格子。</span><br><span class="line">// 当k为18时，机器人能进入方格（35，37） 3+5+3+7=18。</span><br><span class="line">// 请问该机器人能够到达多少个格子？</span><br><span class="line"></span><br><span class="line">public class A54_MovingCount &#123;</span><br><span class="line">    public static int movingCount(int threshold, int rows, int cols)&#123;</span><br><span class="line">        if(threshold &lt; 0 || rows &lt; 0 || cols &lt; 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        boolean[] visited = new boolean[rows * cols];</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; rows * cols; i++)&#123;</span><br><span class="line">            visited[i] = false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int count = movingCountCore(threshold, rows, cols, 0, 0, visited);</span><br><span class="line">        return count;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int movingCountCore(int threshold, int rows, int cols, int row,</span><br><span class="line">                                  int col, boolean[] visited)&#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        if(check(threshold, rows, cols, row, col, visited))&#123;</span><br><span class="line">            visited[row*cols+col] = true;</span><br><span class="line">            count = 1 + movingCountCore(threshold,rows,cols,row-1,col,visited)+</span><br><span class="line">                    movingCountCore(threshold,rows,cols,row+1,col,visited)+</span><br><span class="line">                    movingCountCore(threshold,rows,cols,row,col-1,visited)+</span><br><span class="line">                    movingCountCore(threshold,rows,cols,row,col+1,visited);</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int getDigitSum(int number)&#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        while(number &gt; 0)&#123;</span><br><span class="line">            sum += number % 10;</span><br><span class="line">            number /= 10;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean check(int threshold, int rows, int cols, int row,</span><br><span class="line">                                int col, boolean[] visited)&#123;</span><br><span class="line">        if(row &gt;= 0 &amp;&amp; row &lt; rows &amp;&amp; col &gt;= 0 &amp;&amp; col &lt; cols</span><br><span class="line">                &amp;&amp; getDigitSum(row) + getDigitSum(col) &lt;= threshold</span><br><span class="line">                &amp;&amp; !visited[row*cols+col])&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1264,7 +1293,7 @@ public class FindErrorNums {
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

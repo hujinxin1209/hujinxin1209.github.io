@@ -261,6 +261,343 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/01/Intersection-of-Two-Arrays-350/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/01/Intersection-of-Two-Arrays-350/" class="post-title-link" itemprop="url">Intersection of Two Arrays(350)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-01 12:16:12" itemprop="dateCreated datePublished" datetime="2019-12-01T12:16:12+08:00">2019-12-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 21:34:32" itemprop="dateModified" datetime="2019-12-23T21:34:32+08:00">2019-12-23</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/" itemprop="url" rel="index"><span itemprop="name">leetcode-go</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/sort/" itemprop="url" rel="index"><span itemprop="name">sort</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Intersection-of-Two-Arrays-350"><a href="#Intersection-of-Two-Arrays-350" class="headerlink" title="Intersection of Two Arrays(350)"></a>Intersection of Two Arrays(350)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">Given two arrays, write a function to compute their intersection.</span><br><span class="line">Input: nums1 = [1,2,2,1], nums2 = [2,2]</span><br><span class="line">Output: [2,2]</span><br><span class="line">Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]</span><br><span class="line">Output: [4,9]</span><br><span class="line">这题是第 349 题的加强版。要求输出 2 个数组的交集元素，如果元素出现多次，要输出多次。</span><br><span class="line">把数组一中的数字都放进字典中，另外字典的 key 是数组中的数字，value 是这个数字出现的次数。</span><br><span class="line">在扫描数组二的时候，每取出一个存在的数组，把字典中的 value 减一。</span><br><span class="line">如果 value 是 0 代表不存在这个数字。</span><br><span class="line">*/</span><br><span class="line">func intersect(nums1 []int, nums2 []int) []int&#123;</span><br><span class="line">	m := make(map[int]int)</span><br><span class="line">	var res []int</span><br><span class="line">	for _, n := range nums1&#123;</span><br><span class="line">		m[n]++</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for _, n := range nums2&#123;</span><br><span class="line">		if(m[n] &gt; 0)&#123;</span><br><span class="line">			res = append(res, n)</span><br><span class="line">			m[n]--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/30/twoSum167/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/30/twoSum167/" class="post-title-link" itemprop="url">twoSum(167)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-30 22:25:06 / 修改时间：22:27:03" itemprop="dateCreated datePublished" datetime="2019-11-30T22:25:06+08:00">2019-11-30</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/" itemprop="url" rel="index"><span itemprop="name">leetcode-go</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/two-pointers/" itemprop="url" rel="index"><span itemprop="name">two pointers</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="twoSum-167"><a href="#twoSum-167" class="headerlink" title="twoSum(167)"></a>twoSum(167)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">Given an array of integers that is already sorted in ascending order, </span><br><span class="line">find two numbers such that they add up to a specific target number.</span><br><span class="line">The function twoSum should return indices of the two numbers such that </span><br><span class="line">they add up to the target, where index1 must be less than index2.</span><br><span class="line">Note:</span><br><span class="line">Your returned answers (both index1 and index2) are not zero-based.</span><br><span class="line">You may assume that each input would have exactly one solution and </span><br><span class="line">you may not use the same element twice.</span><br><span class="line">Example:</span><br><span class="line">Input: numbers = [2,7,11,15], target = 9</span><br><span class="line">Output: [1,2]</span><br><span class="line">Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.</span><br><span class="line">找出两个数之和等于 target 的两个数字，要求输出它们的下标。注意一个数字不能使用 2 次。</span><br><span class="line">下标从小到大输出。假定题目一定有一个解。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/11/30/twoSum167/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/Intersection-of-Two-Arrays-349/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/27/Intersection-of-Two-Arrays-349/" class="post-title-link" itemprop="url">Intersection of Two Arrays(349)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-27 20:00:07" itemprop="dateCreated datePublished" datetime="2019-11-27T20:00:07+08:00">2019-11-27</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 21:33:47" itemprop="dateModified" datetime="2019-12-23T21:33:47+08:00">2019-12-23</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/" itemprop="url" rel="index"><span itemprop="name">leetcode-go</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/sort/" itemprop="url" rel="index"><span itemprop="name">sort</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Intersection-of-Two-Arrays-349"><a href="#Intersection-of-Two-Arrays-349" class="headerlink" title="Intersection of Two Arrays(349)"></a>Intersection of Two Arrays(349)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">Given two arrays, write a function to compute their intersection.</span><br><span class="line">Input: nums1 = [1,2,2,1], nums2 = [2,2]</span><br><span class="line">Output: [2]</span><br><span class="line">Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]</span><br><span class="line">Output: [9,4]</span><br><span class="line">找到两个数组的交集元素，如果交集元素同一个数字出现了多次，只输出一次。</span><br><span class="line">解题思路</span><br><span class="line">把数组一的每个数字都存进字典中，然后在数组二中依次判断字典中是否存在，</span><br><span class="line">如果存在，在字典中删除它(因为输出要求只输出一次)。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/11/27/Intersection-of-Two-Arrays-349/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/Reverse-String-easy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -964,301 +1301,11 @@
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/第一个错误版本（278）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/11/13/第一个错误版本（278）/" class="post-title-link" itemprop="url">第一个错误版本（278）</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-11-13 22:02:59 / 修改时间：22:06:55" itemprop="dateCreated datePublished" datetime="2019-11-13T22:02:59+08:00">2019-11-13</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组问题/" itemprop="url" rel="index"><span itemprop="name">数组问题</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="第一个错误版本（278）"><a href="#第一个错误版本（278）" class="headerlink" title="第一个错误版本（278）"></a>第一个错误版本（278）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。</span><br><span class="line">// 你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错</span><br><span class="line">// 思路：</span><br><span class="line">// 如果第 m 个版本出错(即 isisBadVersion(mid) == true)，</span><br><span class="line">// 则表示第一个错误的版本在 [l, m] 之间，令 r = m ；</span><br><span class="line">// 否则第一个错误的版本在 [m + 1, h] 之间，令 l = m + 1。</span><br><span class="line">// 注意:这里判断条件 l &lt; r</span><br><span class="line">public class VersionControl &#123;</span><br><span class="line">    public static int find(int n)&#123;</span><br><span class="line">        int l = 1;</span><br><span class="line">        int r = n;</span><br><span class="line">        while(l &lt; n)&#123;</span><br><span class="line">            int mid = (l + r) / 2;</span><br><span class="line">            if(isBadVersion(mid))&#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean isBadVersion(int version)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/12/二分查找（704）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/11/12/二分查找（704）/" class="post-title-link" itemprop="url">二分查找（704）</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-11-12 22:37:44 / 修改时间：22:41:15" itemprop="dateCreated datePublished" datetime="2019-11-12T22:37:44+08:00">2019-11-12</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组问题/" itemprop="url" rel="index"><span itemprop="name">数组问题</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="二分查找（704）"><a href="#二分查找（704）" class="headerlink" title="二分查找（704）"></a>二分查找（704）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target</span><br><span class="line">// 写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</span><br><span class="line">// 输入: nums = [-1,0,3,5,9,12], target = 9</span><br><span class="line">// 输出: 4</span><br><span class="line">// 解释: 9 出现在 nums 中并且下标为 4</span><br><span class="line">// 输入: nums = [-1,0,3,5,9,12], target = 2</span><br><span class="line">// 输出: -1</span><br><span class="line">// 解释: 2 不存在 nums 中因此返回 -1</span><br><span class="line">public class Search &#123;</span><br><span class="line">   public static int search(int[] nums, int target)&#123;</span><br><span class="line">       int l = 0;</span><br><span class="line">       int h = nums.length - 1;</span><br><span class="line">       while(l &lt;= h)&#123;</span><br><span class="line">           int mid = (l + h) / 2;</span><br><span class="line">           if(nums[mid] == target)&#123;</span><br><span class="line">               return mid;</span><br><span class="line">           &#125;</span><br><span class="line">           if(nums[mid] &gt; target)&#123;</span><br><span class="line">               h = mid - 1;</span><br><span class="line">           &#125; else&#123;</span><br><span class="line">               l = mid + 1;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return -1;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/寻找重复数（287）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/11/09/寻找重复数（287）/" class="post-title-link" itemprop="url">寻找重复数（287）</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-11-09 21:28:23" itemprop="dateCreated datePublished" datetime="2019-11-09T21:28:23+08:00">2019-11-09</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-12 22:16:12" itemprop="dateModified" datetime="2019-11-12T22:16:12+08:00">2019-11-12</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/数组问题/" itemprop="url" rel="index"><span itemprop="name">数组问题</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="寻找重复数（287）"><a href="#寻找重复数（287）" class="headerlink" title="寻找重复数（287）"></a>寻找重复数（287）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// 给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n）</span><br><span class="line">// 至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。</span><br><span class="line">// 输入: [1,3,4,2,2]</span><br><span class="line">// 输出: 2</span><br><span class="line">// 输入: [3,1,3,4,2]</span><br><span class="line">// 输出: 3</span><br><span class="line">// 不能更改原数组（假设数组是只读的）。</span><br><span class="line">// 只能使用额外的 O(1) 的空间。</span><br><span class="line">// 时间复杂度小于 O(n2) 。</span><br><span class="line">// 数组中只有一个重复的数字，但它可能不止重复出现一次。</span><br><span class="line">public class FindDuplicate &#123;</span><br><span class="line">    public static int find(int[] nums)&#123;</span><br><span class="line">        int l = 0;</span><br><span class="line">        int h = nums.length - 1;</span><br><span class="line">        while(l &lt;= h)&#123;</span><br><span class="line">            int mid = (h + l) / 2;</span><br><span class="line">            int cnt = 0;</span><br><span class="line">            for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">                if(nums[i] &lt;= mid)&#123;</span><br><span class="line">                    cnt++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(cnt &gt; mid)&#123;</span><br><span class="line">                h = mid - 1;</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1291,7 +1338,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
