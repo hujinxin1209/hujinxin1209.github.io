@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Robot Return to Origin(657)]]></title>
+    <url>%2F2020%2F07%2F05%2FRobot-Return-to-Origin-657%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516/*在二维平面上，有一个机器人从原点 (0, 0) 开始。给出它的移动顺序，判断这个机器人在完成移动后是否在 (0, 0) 处结束。移动顺序由字符串表示。字符 move[i] 表示其第 i 次移动。机器人的有效动作有 R（右），L（左），U（上）和 D（下）。如果机器人在完成所有动作后返回原点，则返回 true。否则，返回 false。注意：机器人“面朝”的方向无关紧要。 “R” 将始终使机器人向右移动一次，“L” 将始终向左移动等。此外，假设每次移动机器人的移动幅度相同。示例 1:输入: &quot;UD&quot;输出: true解释：机器人向上移动一次，然后向下移动一次。所有动作都具有相同的幅度，因此它最终回到它开始的原点。因此，我们返回 true。示例 2:输入: &quot;LL&quot;输出: false解释：机器人向左移动两次。它最终位于原点的左侧，距原点有两次 “移动” 的距离。我们返回 false，因为它在移动结束时没有返回原点。*/ 12345678910111213141516171819func judgeCircle(moves string) bool &#123; h := 0 v := 0 for i := 0; i &lt; len(moves); i++ &#123; if moves[i] == &apos;R&apos; &#123; h++ &#125; if moves[i] == &apos;L&apos; &#123; h-- &#125; if moves[i] == &apos;U&apos; &#123; v++ &#125; if moves[i] == &apos;D&apos; &#123; v-- &#125; &#125; return h == 0 &amp;&amp; v == 0&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>array</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Destination City(1436)]]></title>
     <url>%2F2020%2F06%2F27%2FDestination-City-1436%2F</url>
     <content type="text"><![CDATA[123456789101112/*You are given the array paths, where paths[i] = [cityAi, cityBi] means there exists a direct pathgoing from cityAi to cityBi. Return the destination city, that is, the city without any path outgoing to another city.It is guaranteed that the graph of paths forms a line without any loop, therefore, there willbe exactly one destination city.Example 1:Input: paths = [[&quot;London&quot;,&quot;New York&quot;],[&quot;New York&quot;,&quot;Lima&quot;],[&quot;Lima&quot;,&quot;Sao Paulo&quot;]]Output: &quot;Sao Paulo&quot;Explanation: Starting at &quot;London&quot; city you will reach &quot;Sao Paulo&quot; city which is the destination city.Your trip consist of: &quot;London&quot; -&gt; &quot;New York&quot; -&gt; &quot;Lima&quot; -&gt; &quot;Sao Paulo&quot;. 12345678910111213141516171819202122232425262728Example 2:Input: paths = [[&quot;B&quot;,&quot;C&quot;],[&quot;D&quot;,&quot;B&quot;],[&quot;C&quot;,&quot;A&quot;]]Output: &quot;A&quot;Explanation: All possible trips are:&quot;D&quot; -&gt; &quot;B&quot; -&gt; &quot;C&quot; -&gt; &quot;A&quot;.&quot;B&quot; -&gt; &quot;C&quot; -&gt; &quot;A&quot;.&quot;C&quot; -&gt; &quot;A&quot;.&quot;A&quot;.Clearly the destination city is &quot;A&quot;.*/func destCity(paths [][]string) string &#123; tmp := make(map[string]int) for _, v := range paths &#123; for i := 0; i &lt; 2; i++ &#123; tmp[v[i]]++ &#125; &#125; for _, v := range paths &#123; for i := 0; i &lt; 2; i++ &#123; if tmp[v[i]] == 1 &amp;&amp; i == 1 &#123; return v[i] &#125; &#125; &#125; return &quot;&quot;&#125;]]></content>
