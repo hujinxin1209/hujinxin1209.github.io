@@ -261,6 +261,107 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/06/First-Unique-Character-in-a-String-387/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/06/06/First-Unique-Character-in-a-String-387/" class="post-title-link" itemprop="url">First Unique Character in a String(387)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-06 20:42:21 / 修改时间：20:46:49" itemprop="dateCreated datePublished" datetime="2020-06-06T20:42:21+08:00">2020-06-06</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/" itemprop="url" rel="index"><span itemprop="name">leetcode-go</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/hash-table/" itemprop="url" rel="index"><span itemprop="name">hash table</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">Given a string, find the first non-repeating character in it and return it&apos;s index. If it doesn&apos;t exist, return -1.</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line"></span><br><span class="line">s = &quot;leetcode&quot;</span><br><span class="line">return 0.</span><br><span class="line"></span><br><span class="line">s = &quot;loveleetcode&quot;,</span><br><span class="line">return 2.</span><br><span class="line">*/</span><br><span class="line">func firstUniqChar(s string) int &#123;</span><br><span class="line">	tmp := make([]int, 26)</span><br><span class="line">	for _, v := range s &#123;</span><br><span class="line">		tmp[v-&apos;a&apos;]++</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for i, v := range s &#123;</span><br><span class="line">		if tmp[v-&apos;a&apos;] == 1 &#123;</span><br><span class="line">			return i</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return -1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Find-the-Difference-389/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1260,116 +1361,6 @@ func uniqueOccurrences(arr []int) bool {
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/Longest-Univalue-Path-687/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2020/05/22/Longest-Univalue-Path-687/" class="post-title-link" itemprop="url">Longest Univalue Path(687)</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2020-05-22 21:10:18 / 修改时间：21:24:24" itemprop="dateCreated datePublished" datetime="2020-05-22T21:10:18+08:00">2020-05-22</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/" itemprop="url" rel="index"><span itemprop="name">leetcode-go</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/leetcode/leetcode-go/tree/" itemprop="url" rel="index"><span itemprop="name">tree</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">Given a binary tree, find the length of the longest path where each node in</span><br><span class="line">the path has the same value. This path may or may not pass through the root.</span><br><span class="line">The length of path between two nodes is represented by the number of edges between them.</span><br><span class="line">Example 1:</span><br><span class="line">Input:</span><br><span class="line"></span><br><span class="line">              5</span><br><span class="line">             / \</span><br><span class="line">            4   5</span><br><span class="line">           / \   \</span><br><span class="line">          1   1   5</span><br><span class="line">Output: 2</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/05/22/Longest-Univalue-Path-687/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
@@ -1407,7 +1398,7 @@ func uniqueOccurrences(arr []int) bool {
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">224</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1486,7 +1477,9 @@ func uniqueOccurrences(arr []int) bool {
         
           
         
-        <span class="site-state-item-count">32</span>
+          
+        
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
