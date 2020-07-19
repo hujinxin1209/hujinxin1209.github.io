@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Maximum Number of Balloons(1189)]]></title>
+    <url>%2F2020%2F07%2F18%2FMaximum-Number-of-Balloons-1189%2F</url>
+    <content type="text"><![CDATA[1234567891011/*Given a string text, you want to use the characters of text to form as many instances of the word &quot;balloon&quot; as possible.You can use each character in text at most once. Return the maximum number of instances that can be formed.Example 1:Input: text = &quot;nlaebolko&quot;Output: 1Example 2:Input: text = &quot;loonbalxballpoon&quot;Output: 2*/ 123456789101112131415161718192021222324func maxNumberOfBalloons(text string) int &#123; a := make([]int, 26) b := &quot;balloon&quot; c := 0 tmp := 0 for _, v := range text&#123; a[v - &apos;a&apos;]++ &#125; for&#123; for _, v := range b&#123; a[v-&apos;a&apos;]-- if a[v-&apos;a&apos;] &lt; 0&#123; return c &#125; tmp++ if tmp == len(b)&#123; tmp = 0 c++ &#125; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>string</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Reverse Words in a String III(557)]]></title>
     <url>%2F2020%2F07%2F12%2FReverse-Words-in-a-String-III-557%2F</url>
     <content type="text"><![CDATA[1234567/*Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.Example 1:Input: &quot;Let&apos;s take LeetCode contest&quot;Output: &quot;s&apos;teL ekat edoCteeL tsetnoc&quot;*/ 1234567891011121314151617181920func reverseWords(s string) string &#123; var start int for end := range s&#123; if s[end] == &apos; &apos;&#123; s = s[:start] + reverseStr(s[start:end]) + s[end:] end++ start = end &#125; &#125; s = s[:start] + reverseStr(s[start:]) return s&#125;func reverseStr(s string) string&#123; str := []byte(s) for i := 0; i &lt; len(str) / 2; i++&#123; str[i], str[len(str)-i-1] = str[len(str)-i-1], str[i] &#125; return string(str)&#125;]]></content>
