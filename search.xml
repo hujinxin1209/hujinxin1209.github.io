@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Detect Capital(520)]]></title>
+    <url>%2F2020%2F07%2F26%2FDetect-Capital-520%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516/*Given a word, you need to judge whether the usage of capitals in it is right or not.We define the usage of capitals in a word to be right when one of the following cases holds:All letters in this word are capitals, like &quot;USA&quot;.All letters in this word are not capitals, like &quot;leetcode&quot;.Only the first letter in this word is capital, like &quot;Google&quot;.Otherwise, we define that this word doesn&apos;t use capitals in a right way.Example 1:Input: &quot;USA&quot;Output: TrueExample 2:Input: &quot;FlaG&quot;Output: False*/ 123456789101112131415161718func detectCapitalUse(word string) bool &#123; count := 0 for _, value := range word&#123; if value &gt;= &apos;A&apos; &amp;&amp; value &lt;= &apos;Z&apos;&#123; count++ &#125; &#125; if count == 1 &amp;&amp; word[0] &gt;= &apos;A&apos; &amp;&amp; word[0] &lt;= &apos;Z&apos;&#123; return true &#125; if count == 0&#123; return true &#125; if count == len(word)&#123; return true &#125; return false&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>string</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Reverse Only Letters(917)]]></title>
+    <url>%2F2020%2F07%2F25%2FReverse-Only-Letters-917%2F</url>
+    <content type="text"><![CDATA[1234567891011/*Given a string S, return the &quot;reversed&quot; string where all characters that are not a letter stay in the same place, and all letters reverse their positions.Example 1:Input: &quot;ab-cd&quot;Output: &quot;dc-ba&quot;Example 2:Input: &quot;a-bC-dEf-ghIj&quot;Output: &quot;j-Ih-gfE-dCba&quot;*/ 123456789101112131415161718192021func reverseOnlyLetters(S string) string &#123; s := []byte(s) i, j := 0, len(S) - 1 for i &lt; j&#123; for i &lt; j &amp;&amp; !isLetter(s[i])&#123; i++ &#125; for i &lt; j &amp;&amp; !isLetter(s[j])&#123; j-- &#125; s[i], s[j] = s[j], s[i] i++ j-- &#125; return string(s)&#125;func isLetter(b byte) bool&#123; return &apos;a&apos; &lt;= b &amp;&amp; b &lt;= &apos;z&apos; || &apos;A&apos; &lt;= b &amp;&amp; b &lt;= &apos;Z&apos;&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>string</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Consecutive Characters(1446)]]></title>
+    <url>%2F2020%2F07%2F22%2FConsecutive-Characters-1446%2F</url>
+    <content type="text"><![CDATA[12345678910111213/*Given a string s, the power of the string is the maximum length of a non-empty substring thatcontains only one unique character.Return the power of the string.Example 1:Input: s = &quot;leetcode&quot;Output: 2Explanation: The substring &quot;ee&quot; is of length 2 with the character &apos;e&apos; only.Example 2:Input: s = &quot;abbcccddddeeeeedcba&quot;Output: 5Explanation: The substring &quot;eeeee&quot; is of length 5 with the character &apos;e&apos; only.*/ 1234567891011121314151617181920func maxPower(s string) int &#123; max := 1 curCount := 1 curChar := s[0] for i := 1; i &lt; len(s); i++ &#123; if s[i] == curChar &#123; curCount++ &#125; else &#123; if curCount &gt; max &#123; max = curCount &#125; curCount = 1 curChar = s[i] &#125; &#125; if curCount &gt; max &#123; max = curCount &#125; return max&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>string</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Maximum Number of Balloons(1189)]]></title>
     <url>%2F2020%2F07%2F18%2FMaximum-Number-of-Balloons-1189%2F</url>
     <content type="text"><![CDATA[1234567891011/*Given a string text, you want to use the characters of text to form as many instances of the word &quot;balloon&quot; as possible.You can use each character in text at most once. Return the maximum number of instances that can be formed.Example 1:Input: text = &quot;nlaebolko&quot;Output: 1Example 2:Input: text = &quot;loonbalxballpoon&quot;Output: 2*/ 123456789101112131415161718192021222324func maxNumberOfBalloons(text string) int &#123; a := make([]int, 26) b := &quot;balloon&quot; c := 0 tmp := 0 for _, v := range text&#123; a[v - &apos;a&apos;]++ &#125; for&#123; for _, v := range b&#123; a[v-&apos;a&apos;]-- if a[v-&apos;a&apos;] &lt; 0&#123; return c &#125; tmp++ if tmp == len(b)&#123; tmp = 0 c++ &#125; &#125; &#125;&#125;]]></content>
