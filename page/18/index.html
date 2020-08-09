@@ -261,6 +261,93 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/21/替换空格/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ugia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凡星一点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/21/替换空格/" class="post-title-link" itemprop="url">替换字符串中的空格</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-21 21:28:03 / 修改时间：21:29:20" itemprop="dateCreated datePublished" datetime="2019-10-21T21:28:03+08:00">2019-10-21</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="替换字符串中的空格"><a href="#替换字符串中的空格" class="headerlink" title="替换字符串中的空格"></a>替换字符串中的空格</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">// 替换空格</span><br><span class="line">public class A04_ReplaceBlank &#123;</span><br><span class="line">	// StringBuilder</span><br><span class="line">	public static String replaceBlank(String input) &#123;</span><br><span class="line">		if(input == null) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		StringBuilder sb = new StringBuilder();</span><br><span class="line">		for(int i = 0; i &lt; input.length(); i++) &#123;</span><br><span class="line">			if(String.valueOf(input.charAt(i)).equals(&quot; &quot;)) &#123;</span><br><span class="line">				sb.append(&quot;%20&quot;);</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				sb.append(input.charAt(i));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return sb.toString();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 从后往前复制</span><br><span class="line">	public static String replaceBlank2(String input) &#123;</span><br><span class="line">		if(input == null) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		int blankNum = 0;</span><br><span class="line">		int length = input.length();</span><br><span class="line">		int newLength = 0;</span><br><span class="line">		for(int i = 0; i &lt; input.length(); i++) &#123;</span><br><span class="line">			if(input.charAt(i) == &apos; &apos;) &#123;</span><br><span class="line">				blankNum++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		newLength = length + blankNum * 2;</span><br><span class="line">		char[] newChars = new char[newLength];</span><br><span class="line">		int index = newLength - 1;</span><br><span class="line">		for(int i = length - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">			if(input.charAt(i) == &apos; &apos;) &#123;</span><br><span class="line">				newChars[index--] = &apos;0&apos;;</span><br><span class="line">				newChars[index--] = &apos;2&apos;;</span><br><span class="line">				newChars[index--] = &apos;%&apos;;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				newChars[index--] = input.charAt(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return new String(newChars);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		String s = &quot;s df ette tg &quot;;</span><br><span class="line">		System.out.println(&quot;one: ---&gt;&quot; + replaceBlank(s));</span><br><span class="line">		System.out.println(&quot;two: ---&gt;&quot; + replaceBlank2(s));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/21/二维数组中的查找/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1112,93 +1199,6 @@
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/圆圈中最后剩下的数字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ugia">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凡星一点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/14/圆圈中最后剩下的数字/" class="post-title-link" itemprop="url">圆圈中最后剩下的数字</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-14 20:13:28 / 修改时间：20:21:21" itemprop="dateCreated datePublished" datetime="2019-10-14T20:13:28+08:00">2019-10-14</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/sword-offer/" itemprop="url" rel="index"><span itemprop="name">sword offer</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="圆圈中最后剩下的数字"><a href="#圆圈中最后剩下的数字" class="headerlink" title="圆圈中最后剩下的数字"></a>圆圈中最后剩下的数字</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">// 0,1...n-1这n个数字排成一个圆圈，从数字0开始每次从这个圆圈里删除第m个数字</span><br><span class="line">// 求圆圈中最后剩下的数字</span><br><span class="line">public class A45_LastRemainRing &#123;</span><br><span class="line">    // 借助链表</span><br><span class="line">    public static int lastRemainRing(int n, int m)&#123;</span><br><span class="line">        LinkedList&lt;Integer&gt; list = new LinkedList&lt;Integer&gt;();</span><br><span class="line">        int index = 0;</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; n; i++)&#123;</span><br><span class="line">            list.add(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while(list.size() &gt; 1)&#123;</span><br><span class="line">            index = (index + m - 1) % list.size();</span><br><span class="line">            list.remove(index);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return list.size() == 1 ? list.get(0) : -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 借助公式</span><br><span class="line">    public static int lastRemainRing2(int n, int m)&#123;</span><br><span class="line">        if(n &lt; 1 || m &lt; 1)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int last = 0;</span><br><span class="line">        for(int i = 2; i &lt;= n; i++)&#123;</span><br><span class="line">            // i个人时删除数的索引等于i-1个人时删除数的索引+k(再对i取余)</span><br><span class="line">            last = (last + m) % i;</span><br><span class="line">        &#125;</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
@@ -1236,7 +1236,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-count">232</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

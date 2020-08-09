@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Repeated Substring Pattern(459)]]></title>
+    <url>%2F2020%2F08%2F08%2FRepeated-Substring-Pattern-459%2F</url>
+    <content type="text"><![CDATA[123456789/*Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.Example 1:Input: &quot;abab&quot;Output: TrueExplanation: It&apos;s the substring &quot;ab&quot; twice. 123456789101112Example 2:Input: &quot;aba&quot;Output: False比如字符串：S = acd，那么str = S + S = acdacdacd移动的可能：dac、cda。其实都包含在了str中了。就像一个滑动窗口一开始acd (acd) ，移动一次ac(dac)d,移动两次a(cda)cd。循环结束所以可以直接判断str中去除首尾元素之后，是否包含自身元素。如果包含。则表明存在重复子串。*/func repeatedSubstringPattern(s string) bool &#123; ss := (s + s)[1 : len(s)*2 - 1] return string.Contains(ss, s)&#125;]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>string</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Add Binary(67)]]></title>
     <url>%2F2020%2F08%2F02%2FAdd-Binary-67%2F</url>
     <content type="text"><![CDATA[123456789101112/*Given two binary strings, return their sum (also a binary string).The input strings are both non-empty and contains only characters 1 or 0.Example 1:Input: a = &quot;11&quot;, b = &quot;1&quot;Output: &quot;100&quot;Example 2:Input: a = &quot;1010&quot;, b = &quot;1011&quot;Output: &quot;10101&quot;*/ 123456789101112131415161718192021func addBinary(a string, b string) string &#123; s := 0 carry := 0 res := &quot;&quot; rightA := len(a) - 1 rightB := len(b) - 1 for rightA &gt;= 0 || rightB &gt;= 0 || carry != 0&#123; s = carry if rightA &gt;= 0&#123; s += int(a[rightA] - &apos;0&apos;) rightA-- &#125; if rightB &gt;= 0&#123; s += int(b[rightB] - &apos;0&apos;) rightB-- &#125; carry = s / 2 res = string(s % 2 + &apos;0&apos;) + res &#125; return res&#125;]]></content>
