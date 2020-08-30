@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Find All Duplicates in an Array(442)]]></title>
+    <url>%2F2020%2F08%2F30%2FFind-All-Duplicates-in-an-Array-442%2F</url>
+    <content type="text"><![CDATA[123456789101112/*Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.Find all the elements that appear twice in this array.Could you do it without extra space and in O(n) runtime?Example:Input:[4,3,2,7,8,2,3,1]Output:[2,3]*/ func findDuplicates(nums []int) []int { for i := 0; i &lt; len(nums); i++{ for nums[i] != i+1{ if nums[nums[i]-1] == nums[i]{ break } nums[nums[i]-1], nums[i] = nums[i], nums[nums[i]-1] } } rst := []int{} for i, v := range nums{ if v != i + 1{ rst = append(rst, v) } } return rst }]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>leetcode-go</category>
+        <category>array</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Longest Common Prefix(14)]]></title>
     <url>%2F2020%2F08%2F15%2FLongest-Common-Prefix-14%2F</url>
     <content type="text"><![CDATA[123456789101112/*Write a function to find the longest common prefix string amongst an array of strings.If there is no common prefix, return an empty string &quot;&quot;.Example 1:Input: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]Output: &quot;fl&quot;Example 2:Input: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]Output: &quot;&quot;Explanation: There is no common prefix among the input strings.*/ 123456789101112131415161718192021func longestCommonPrefix(strs []string) string &#123; if len(strs) == 0 &#123; return &quot;&quot; &#125; pre := strs[0] for _, item := range strs &#123; pre = helper(pre, item) &#125; return pre&#125;func helper(s1, s2 string) string &#123; rst := make([]byte, 0) for i := 0; i &lt; len(s1) &amp;&amp; i &lt; len(s2); i++ &#123; if s1[i] != s2[i] &#123; break &#125; rst = append(rst, s1[i]) &#125; return string(rst)&#125;]]></content>
